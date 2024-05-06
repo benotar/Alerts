@@ -22,14 +22,14 @@ public class AlertsController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetActiveAlerts()
     {
-        var url = _alertsService.GetActiveAlertsUrl();
+        string url = _alertsService.GetActiveAlertsUrl();
 
         if (IsNullOrEmpty(url))
         {
             return BadRequest();
         }
         
-        var getActiveAlerts = new GetActiveAlerts(url);
+        GetActiveAlerts getActiveAlerts = new (url);
 
         var result = await getActiveAlerts.GetAlertsAsync();
 
@@ -38,6 +38,31 @@ public class AlertsController : Controller
             return NotFound();
         }
         
+        return Ok(result);
+    }
+
+    [HttpGet("byOblasts")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetActiveAlertsByOblasts()
+    {
+        string url = _alertsService.GetAlertsByOblasts();
+        
+        if (IsNullOrEmpty(url))
+        {
+            return BadRequest();
+        }
+
+        GetAlertsByOblasts getAlertsByOblasts = new(url);
+
+        var result = await getAlertsByOblasts.GetAlerts();
+
+        if (IsNullOrEmpty(result))
+        {
+            return NotFound();
+        }
+
         return Ok(result);
     }
 }
