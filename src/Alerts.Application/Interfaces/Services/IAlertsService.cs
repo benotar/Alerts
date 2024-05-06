@@ -2,5 +2,7 @@
 
 public interface IAlertsService
 {
+    string GetAlertsToken();
+    string GetActiveAlertsUrl();
     
 }
