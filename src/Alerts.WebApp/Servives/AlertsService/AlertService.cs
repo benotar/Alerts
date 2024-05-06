@@ -23,4 +23,13 @@ public class AlertService : IAlertsService
 
         return result;
     }
+
+    public string GetAlertsByOblasts()
+    {
+        var result = _config.GetValue<string>("GetAlertsByOblastsUrl");
+
+        result += _config.GetValue<string>("AlertsToken");
+
+        return result;
+    }
 }
