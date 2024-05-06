@@ -15,15 +15,12 @@ public class Alerts
     public LocationType LocationType { get; set; }
     
     [JsonProperty("started_at")]
-    // [JsonConverter(typeof(UnixDateTimeConverter))]
     public DateTime StartedAt { get; set; }
     
     [JsonProperty("finished_at")]
-    // [JsonConverter(typeof(UnixDateTimeConverter))]
     public DateTime? FinishedAt { get; set; }
     
     [JsonProperty("updated_at")]
-    // [JsonConverter(typeof(UnixDateTimeConverter))]
     public DateTime UpdatedAt { get; set; }
     
     [JsonProperty("alert_type")]

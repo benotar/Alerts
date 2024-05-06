@@ -2,15 +2,25 @@
 
 namespace Alerts.WebApp.Servives.AlertsService;
 
-public class AlertService(IConfiguration config) : IAlertsService
+public class AlertService : IAlertsService
 {
+    private readonly IConfiguration _config;
+
+    public AlertService(IConfiguration config)
+    {
+        _config = config;
+    }
     public string GetAlertsToken()
     {
-        return config.GetValue<string>("AlertsApi:AlertsToken");
+        return _config.GetValue<string>("AlertsApi:AlertsToken");
     }
 
     public string GetActiveAlertsUrl()
     {
-        return config.GetValue<string>("AlertsApi:GetFullAlertsMethodUrl");
+        var result = _config.GetValue<string>("GetFullAlertsMethodUrl");
+
+        result += _config.GetValue<string>("AlertsToken");
+
+        return result;
     }
 }
