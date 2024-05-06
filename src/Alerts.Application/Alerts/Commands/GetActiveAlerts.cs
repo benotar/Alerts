@@ -12,7 +12,7 @@ public class GetActiveAlerts
         _url = url;
     }
     
-    public async Task<RootObject> GetAlertsAsync()
+    public async Task<RootObject> InvokeAsync()
     {
         using (HttpClient httpClient = new())
         {

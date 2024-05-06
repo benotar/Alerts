@@ -9,7 +9,7 @@ public class GetAlertsByOblasts
         _url = url;
     }
     
-    public async Task<string> GetAlerts()
+    public async Task<string> InvokeAsync()
     {
         using (HttpClient httpClient = new())
         {

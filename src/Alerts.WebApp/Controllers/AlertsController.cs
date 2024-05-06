@@ -31,7 +31,7 @@ public class AlertsController : Controller
         
         GetActiveAlerts getActiveAlerts = new (url);
 
-        var result = await getActiveAlerts.GetAlertsAsync();
+        var result = await getActiveAlerts.InvokeAsync();
 
         if (result is null)
         {
@@ -56,7 +56,7 @@ public class AlertsController : Controller
 
         GetAlertsByOblasts getAlertsByOblasts = new(url);
 
-        var result = await getAlertsByOblasts.GetAlerts();
+        var result = await getAlertsByOblasts.InvokeAsync();
 
         if (IsNullOrEmpty(result))
         {
