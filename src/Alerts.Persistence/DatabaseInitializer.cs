@@ -1,6 +1,6 @@
 ﻿namespace Alerts.Persistence;
 
-public class DatabaseInitializer
+public static class DatabaseInitializer
 {
     public static void Initialize(ApplicationDbContext db)
     {
