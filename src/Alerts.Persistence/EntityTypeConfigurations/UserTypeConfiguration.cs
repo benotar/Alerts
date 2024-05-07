@@ -17,7 +17,6 @@ public class UserTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Name).HasColumnName("name");
         builder.Property(u => u.PasswordSalt).HasColumnName("password_salt");
         builder.Property(u => u.PasswordHash).HasColumnName("password_hash");
-        builder.Property(u => u.JwtToken).HasColumnName("jwt_token");
         builder.Property(u => u.CreatedAt).HasColumnName("created_at");
         builder.Property(u => u.UpdatedAt).HasColumnName("updated_at");
         builder.Property(u => u.Regions).HasColumnName("regions");

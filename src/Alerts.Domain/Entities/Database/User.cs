@@ -9,7 +9,5 @@ public class User : DatabaseEntity
     
     public string? Name { get; set; }
     
-    public string? JwtToken { get; set; }
-
     public List<string> Regions { get; set; } = new();
 }
