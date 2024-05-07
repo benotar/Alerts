@@ -14,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Alerts.Application\Alerts.Application.csproj" />
+      <ProjectReference Include="..\Alerts.Persistence\Alerts.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

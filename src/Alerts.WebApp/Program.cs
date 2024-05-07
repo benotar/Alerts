@@ -1,15 +1,24 @@
+using Alerts.Application.Interfaces;
 using Alerts.Application.Interfaces.Services;
+using Alerts.Persistence;
 using Alerts.WebApp.Servives.AlertsService;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+ var scope = builder.Services.BuildServiceProvider().CreateScope();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IAlertsService, AlertService>();
+builder.Services.AddSingleton<IAlertsService, AlertService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("SQLiteConnection"));
+});
+
 
 var app = builder.Build();
 
