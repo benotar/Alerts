@@ -17,5 +17,6 @@ public class UserTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.CreatedAt).HasColumnName("created_at");
         builder.Property(u => u.UpdatedAt).HasColumnName("updated_at");
         builder.Property(u => u.Regions).HasColumnName("regions");
+        builder.Property(u => u.Role).HasColumnName("role");
     }
 }
