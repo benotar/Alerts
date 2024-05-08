@@ -1,8 +1,7 @@
 ﻿namespace Alerts.Domain.Entities.AuthModels;
 
-public abstract class BaseAuthModel
+public class AuthorizationModel : IAuthModel
 {
     public string UserName { get; set; }
-
     public string Password { get; set; }
 }

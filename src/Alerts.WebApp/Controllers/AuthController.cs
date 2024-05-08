@@ -1,10 +1,16 @@
-﻿using System.Security.Cryptography;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using Alerts.Application.Configurations;
+using Alerts.Application.Hepler;
 using Alerts.Domain.Entities.AuthModels;
 using Alerts.Domain.Entities.Database;
 using Alerts.Domain.Entities.Database.Dtos;
 using Alerts.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Alerts.WebApp.Controllers;
 
@@ -14,9 +20,13 @@ public class AuthController : Controller
 {
     private readonly ApplicationDbContext _db;
 
-    public AuthController(ApplicationDbContext db)
+    private readonly JwtConfiguration _jwtConfiguration;
+    
+    public AuthController(ApplicationDbContext db, JwtConfiguration jwtConfiguration)
     {
         _db = db;
+
+        _jwtConfiguration = jwtConfiguration;
     }
     
     [HttpPost("Register")]
@@ -67,5 +77,42 @@ public class AuthController : Controller
         };
         
         return Ok(returnUser);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] AuthorizationModel authModel)
+    {
+        var user = await _db.Users.Where(u => u.UserName == authModel.UserName).FirstOrDefaultAsync();
+
+        if (user is null)
+        {
+            return NotFound($"The user \'{authModel.UserName}\' was not found in the database!");
+        }
+
+        var match = AuthHelper.CheckPassword(authModel.Password, user);
+
+        if (!match)
+        {
+            return BadRequest("Password was invalid!");
+        }
+
+        SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtConfiguration.SecretKey));
+
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, authModel.UserName),
+            new(ClaimTypes.Role, user.Role)
+        };
+
+        var jwtToken = new JwtSecurityToken(
+            issuer: "MyAlertServer",
+            audience: "MyWpfAuthClient",
+            claims: claims,
+            expires: DateTime.UtcNow.AddDays(7),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature));
+
+        var tokenString = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+        
+        return Ok(tokenString);
     }
 }
