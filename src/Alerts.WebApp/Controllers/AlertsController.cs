@@ -1,4 +1,6 @@
-﻿using Alerts.Application.Alerts.Commands;
+﻿using System.Net;
+using System.Security.Claims;
+using Alerts.Application.Alerts.Commands;
 using Alerts.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,13 +44,20 @@ public class AlertsController : Controller
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [Authorize(Roles = "User")]
     [HttpGet("byOblasts")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetActiveAlertsByOblasts()
     {
+        if (!User.Identity.IsAuthenticated)
+        {
+            return Unauthorized("User is not authenticated!");
+        }
+        
         string url = _alertsService.GetAlertsByOblasts();
         
         if (IsNullOrEmpty(url))
