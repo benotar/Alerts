@@ -8,10 +8,7 @@ public class UserTypeConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasKey(u => u.UserName);
         builder.HasIndex(u => u.UserName).IsUnique();
-
-
         builder.Property(u => u.Id).HasColumnName("id");
         builder.Property(u => u.UserName).HasColumnName("user_name");
         builder.Property(u => u.Name).HasColumnName("name");

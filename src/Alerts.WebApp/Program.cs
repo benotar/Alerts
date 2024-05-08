@@ -1,9 +1,6 @@
-using Alerts.Application.Interfaces;
 using Alerts.Application.Interfaces.Services;
 using Alerts.Persistence;
-using Alerts.WebApp;
 using Alerts.WebApp.Servives.AlertsService;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
