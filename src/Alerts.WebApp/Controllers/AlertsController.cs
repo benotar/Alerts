@@ -1,5 +1,6 @@
 ﻿using Alerts.Application.Alerts.Commands;
 using Alerts.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.String;
 
@@ -41,6 +42,7 @@ public class AlertsController : Controller
         return Ok(result);
     }
 
+    [Authorize(Roles = "User")]
     [HttpGet("byOblasts")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

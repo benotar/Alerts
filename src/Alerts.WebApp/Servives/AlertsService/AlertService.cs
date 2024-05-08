@@ -12,14 +12,16 @@ public class AlertService : IAlertsService
     }
     public string GetAlertsToken()
     {
-        return _config.GetValue<string>("AlertsApi:AlertsToken");
+        return _config.GetValue<string>("AlertsToken");
     }
 
     public string GetActiveAlertsUrl()
     {
         var result = _config.GetValue<string>("GetFullAlertsMethodUrl");
 
-        result += _config.GetValue<string>("AlertsToken");
+        //result += _config.GetValue<string>("AlertsToken");
+
+        result += GetAlertsToken();
 
         return result;
     }
@@ -28,8 +30,10 @@ public class AlertService : IAlertsService
     {
         var result = _config.GetValue<string>("GetAlertsByOblastsUrl");
 
-        result += _config.GetValue<string>("AlertsToken");
+        //result += _config.GetValue<string>("AlertsToken");
 
+        result += GetAlertsToken();
+        
         return result;
     }
 }
