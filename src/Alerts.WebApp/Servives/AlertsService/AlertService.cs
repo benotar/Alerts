@@ -18,9 +18,7 @@ public class AlertService : IAlertsService
     public string GetActiveAlertsUrl()
     {
         var result = _config.GetValue<string>("GetFullAlertsMethodUrl");
-
-        //result += _config.GetValue<string>("AlertsToken");
-
+        
         result += GetAlertsToken();
 
         return result;
@@ -30,9 +28,14 @@ public class AlertService : IAlertsService
     {
         var result = _config.GetValue<string>("GetAlertsByOblastsUrl");
 
-        //result += _config.GetValue<string>("AlertsToken");
-
         result += GetAlertsToken();
+        
+        return result;
+    }
+
+    public string GetAlertByOblastIdUrl()
+    {
+        var result = _config.GetValue<string>("GetAlertByOblastIdUrl");
         
         return result;
     }

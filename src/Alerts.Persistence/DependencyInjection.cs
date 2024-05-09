@@ -11,8 +11,6 @@ public static class DependencyInjection
     {
         var scope = services.BuildServiceProvider().CreateScope();
         
-       // var jwtConfiguration = scope.ServiceProvider.GetRequiredService<JwtConfiguration>();
-
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlite("Data source=alerts.db");

@@ -13,9 +13,9 @@ public class GetAlertsByOblasts
     {
         using (HttpClient httpClient = new())
         {
-            var request = await httpClient.GetAsync(_url);
+            var responseMessage = await httpClient.GetAsync(_url);
 
-            var content = await request.Content.ReadAsStringAsync();
+            var content = await responseMessage.Content.ReadAsStringAsync();
 
             return content;
         }
