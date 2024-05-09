@@ -482,3 +482,11 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# JetBrains
+.DS_Store
+.idea
+
+# temp db files
+*.db-shm
+*.db-wal
