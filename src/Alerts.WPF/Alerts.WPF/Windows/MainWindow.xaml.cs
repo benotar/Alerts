@@ -11,4 +11,14 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private void ToggleTheme(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }

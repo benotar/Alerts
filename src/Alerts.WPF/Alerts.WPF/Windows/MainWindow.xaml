@@ -6,8 +6,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MainWindow" Height="760" Width="450"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None">
+    
+    
+    <materialDesign:Card UniformCornerRadius="15"
+                         Background="{DynamicResource MaterialDesignPaper}"
+                         Margin="25">
+        
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+            
+            <StackPanel>
+                
+                <materialDesign:PopupBox HorizontalAlignment="Right"
+                                         Margin="0 20 20 0"
+                                         StaysOpen="True"
+                                         Height="25"
+                                         PlacementMode="BottomAndAlignRightEdges">
+                    
+                    <StackPanel>
+                        
+                        <StackPanel Margin="16 10 0 6"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            
+                            <TextBlock VerticalAlignment="Center" Text="Dark mode"/>
+                            
+                            <ToggleButton Cursor="Hand" ToolTip="Enable dark mode"
+                                          Margin="12 0 8 0 "
+                                          x:Name="ThemeToggle"
+                                          IsChecked="{Binding IsDarkTheme}"
+                                          Click="ToggleTheme"/>
+                            
+                        </StackPanel>
+                        
+                        <Button x:Name="ExitPopupBoxBtn"
+                                ToolTip="Close application"
+                                Content="Exit"
+                                Click="ExitPopupBoxBtnOnClick"/>
+                        
+                    </StackPanel>
+                    
+                </materialDesign:PopupBox>
+                
+                
+                
+            </StackPanel>
+            
+            
+        </materialDesign:DialogHost>
+        
+    </materialDesign:Card>
 </Window>
