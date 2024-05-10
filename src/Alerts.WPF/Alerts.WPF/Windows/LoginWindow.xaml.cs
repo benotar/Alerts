@@ -7,13 +7,13 @@ namespace Alerts.WPF.Windows;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class LoginWindow : Window
 {
     public bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
     
-    public MainWindow()
+    public LoginWindow()
     {
         _paletteHelper = new PaletteHelper();
         
