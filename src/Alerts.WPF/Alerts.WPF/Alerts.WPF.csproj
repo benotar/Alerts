@@ -20,4 +20,11 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\alerts-logo.png" />
+    <Content Include="Resources\alerts-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

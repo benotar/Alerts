@@ -11,53 +11,113 @@
         Background="{x:Null}"
         AllowsTransparency="True"
         WindowStyle="None">
-    
-    
+
+
     <materialDesign:Card UniformCornerRadius="15"
                          Background="{DynamicResource MaterialDesignPaper}"
                          Margin="25">
-        
+
         <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
-            
+
             <StackPanel>
-                
+
                 <materialDesign:PopupBox HorizontalAlignment="Right"
                                          Margin="0 20 20 0"
                                          StaysOpen="True"
                                          Height="25"
                                          PlacementMode="BottomAndAlignRightEdges">
-                    
+
                     <StackPanel>
-                        
+
                         <StackPanel Margin="16 10 0 6"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
-                            
-                            <TextBlock VerticalAlignment="Center" Text="Dark mode"/>
-                            
+
+                            <TextBlock VerticalAlignment="Center" Text="Dark mode" />
+
                             <ToggleButton Cursor="Hand" ToolTip="Enable dark mode"
                                           Margin="12 0 8 0 "
                                           x:Name="ThemeToggle"
                                           IsChecked="{Binding IsDarkTheme}"
-                                          Click="ToggleTheme"/>
-                            
+                                          Click="ToggleTheme" />
+
                         </StackPanel>
-                        
+
                         <Button x:Name="ExitPopupBoxBtn"
                                 ToolTip="Close application"
                                 Content="Exit"
-                                Click="ExitPopupBoxBtnOnClick"/>
-                        
+                                Click="ExitPopupBoxBtnOnClick" />
+
                     </StackPanel>
-                    
+
                 </materialDesign:PopupBox>
+
+                <Image Source="../Resources/alerts-logo.png"
+                       Margin="0 60 0 30"
+                       Height="130" />
+
+                <TextBlock Text="Welcome Back!"
+                           Margin="0 0 0 5"
+                           HorizontalAlignment="Center"
+                           FontFamily="Consolas"
+                           FontWeight="Bold"
+                           FontSize="28" />
+
+                <TextBlock Text="Log in to your existing account"
+                           FontFamily="Consolas"
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="17"
+                           Margin="0 0 0 50" />
+
+                <TextBox Margin="0 0 0 20"
+                         x:Name="UserNameTxtBox"
+                         Width="300"
+                         FontSize="18"
+                         FontFamily="Consolas"
+                         materialDesign:HintAssist.Hint="Enter username"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <PasswordBox x:Name="UserPasswordBox"
+                             Margin="0 0 0 20"
+                             Width="300"
+                             FontSize="18"
+                             FontFamily="Consolas"
+                             materialDesign:HintAssist.Hint="Enter password"
+                             BorderBrush="{DynamicResource MaterialDesignDivider}"
+                             Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" />
                 
+                <Button Margin="0 0 0 20"
+                        Content="LOG IN"
+                        FontWeight="SemiBold"
+                        FontSize="18"
+                        FontFamily="Consolas"
+                        x:Name="LoginBtn"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" 
+                        Height="53"
+                        Width="300"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Click="LoginBtnOnClick"/>
                 
+                <Button Margin="0 0 0 20"
+                        Content="Create Account"
+                        FontWeight="SemiBold"
+                        FontSize="18"
+                        FontFamily="Consolas"
+                        x:Name="CreateAccountBtn"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" 
+                        Height="53"
+                        Width="300"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Click="CreateAccountBtnOnClick"/>
                 
             </StackPanel>
-            
-            
+
+
         </materialDesign:DialogHost>
-        
+
     </materialDesign:Card>
 </Window>
