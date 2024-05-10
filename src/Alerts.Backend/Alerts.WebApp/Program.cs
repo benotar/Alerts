@@ -19,6 +19,16 @@ builder.Services.AddPersistence();
 
 builder.Services.AddSingleton<IAlertsService, AlertService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        corsPolicyBuilder =>
+        {
+            corsPolicyBuilder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 var scope = builder.Services.BuildServiceProvider().CreateScope();
 
