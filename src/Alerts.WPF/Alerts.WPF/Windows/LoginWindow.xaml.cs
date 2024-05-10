@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net.Http;
+using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 
@@ -12,11 +13,11 @@ public partial class LoginWindow : Window
     public bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
-    
+
     public LoginWindow()
     {
         _paletteHelper = new PaletteHelper();
-        
+
         InitializeComponent();
     }
 
@@ -25,20 +26,28 @@ public partial class LoginWindow : Window
         ITheme theme = _paletteHelper.GetTheme();
 
         IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark;
-        
+
         theme.SetBaseTheme(IsDarkTheme ? Theme.Light : Theme.Dark);
-        
+
         _paletteHelper.SetTheme(theme);
-    } 
+    }
 
     private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
         Application.Current.Shutdown();
     }
 
-    private void LoginBtnOnClick(object sender, RoutedEventArgs e)
+    private async void LoginBtnOnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        var userName = UserNameTxtBox.Text;
+
+        var userPassword = UserPasswordBox.Password;
+
+        string responseBody = await Temp(userName, userPassword);
+
+        MainContentWindow mainContentWindow = new(responseBody);
+
+        mainContentWindow.ShowDialog();
     }
 
     private void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
@@ -46,10 +55,43 @@ public partial class LoginWindow : Window
         throw new NotImplementedException();
     }
 
+    // TODO Temp
+
+    private async Task<string> Temp(string a, string b)
+    {
+        string apiUrl = "https://localhost:44305/auth/login";
+
+        string jsonBody = $"{{\"userName\": \"{a}\", \"password\": \"{b}\"}}";
+
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+
+            HttpResponseMessage response = await httpClient.PostAsync(apiUrl, new StringContent(jsonBody));
+
+
+            string responseBody = String.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                responseBody = await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                MessageBox.Show($"Error: {response.StatusCode}");
+            }
+
+            return responseBody;
+        }
+    }
+
+
+    
+    
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
         base.OnMouseLeftButtonDown(e);
-        
+
         DragMove();
     }
 }
