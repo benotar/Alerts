@@ -10,4 +10,3 @@ namespace Alerts.WPF;
 public partial class App : Application
 {
 }
-

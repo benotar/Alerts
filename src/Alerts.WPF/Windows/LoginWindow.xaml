@@ -10,7 +10,8 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
-        WindowStyle="None">
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
 
 
     <materialDesign:Card UniformCornerRadius="15"
