@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alerts.WPF", "Alerts.WPF.csproj", "{47AC8C2F-C5D1-46CA-9852-7C2FA59B60EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alerts.BackendFolder", "Alerts.BackendFolder", "{30A92A2A-69E9-44F3-B586-FA248092676D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alerts.WebApp", "..\Alerts.Backend\Alerts.WebApp\Alerts.WebApp.csproj", "{D323C960-069D-4EB7-93B4-C1548EB1484B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,12 @@ Global
 		{47AC8C2F-C5D1-46CA-9852-7C2FA59B60EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47AC8C2F-C5D1-46CA-9852-7C2FA59B60EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47AC8C2F-C5D1-46CA-9852-7C2FA59B60EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D323C960-069D-4EB7-93B4-C1548EB1484B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D323C960-069D-4EB7-93B4-C1548EB1484B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D323C960-069D-4EB7-93B4-C1548EB1484B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D323C960-069D-4EB7-93B4-C1548EB1484B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D323C960-069D-4EB7-93B4-C1548EB1484B} = {30A92A2A-69E9-44F3-B586-FA248092676D}
 	EndGlobalSection
 EndGlobal

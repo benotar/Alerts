@@ -14,6 +14,8 @@ namespace Alerts.WPF.Windows;
 /// </summary>
 public partial class LoginWindow : Window
 {
+    
+    
     public bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
@@ -38,7 +40,7 @@ public partial class LoginWindow : Window
 
     private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
-        Application.Current.Shutdown();
+        System.Windows.Application.Current.Shutdown();
     }
 
     private async void LoginBtnOnClick(object sender, RoutedEventArgs e)
