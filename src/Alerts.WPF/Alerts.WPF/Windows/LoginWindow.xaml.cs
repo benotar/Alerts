@@ -1,4 +1,8 @@
 ﻿using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
@@ -43,11 +47,24 @@ public partial class LoginWindow : Window
 
         var userPassword = UserPasswordBox.Password;
 
-        string responseBody = await Temp(userName, userPassword);
+        using (var httpClient = new HttpClient())
+        {
+            string apiUrl = "https://localhost:44305/auth/login";
 
-        MainContentWindow mainContentWindow = new(responseBody);
+            var json = JsonSerializer.Serialize(new { UserName = userName, Password = userPassword });
+            
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        mainContentWindow.ShowDialog();
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(apiUrl, content);
+
+
+
+            MainContentWindow mainContentWindow = new(await response.Content.ReadAsStringAsync());
+
+            mainContentWindow.ShowDialog();
+        }
     }
 
     private void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
@@ -55,39 +72,9 @@ public partial class LoginWindow : Window
         throw new NotImplementedException();
     }
 
-    // TODO Temp
-
-    private async Task<string> Temp(string a, string b)
-    {
-        string apiUrl = "https://localhost:44305/auth/login";
-
-        string jsonBody = $"{{\"userName\": \"{a}\", \"password\": \"{b}\"}}";
-
-        using (var httpClient = new HttpClient())
-        {
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-
-            HttpResponseMessage response = await httpClient.PostAsync(apiUrl, new StringContent(jsonBody));
-
-
-            string responseBody = String.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                responseBody = await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
-                MessageBox.Show($"Error: {response.StatusCode}");
-            }
-
-            return responseBody;
-        }
-    }
-
-
     
-    
+
+
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
         base.OnMouseLeftButtonDown(e);

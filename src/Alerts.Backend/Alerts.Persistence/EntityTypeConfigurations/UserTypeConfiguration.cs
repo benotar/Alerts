@@ -19,4 +19,5 @@ public class UserTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Regions).HasColumnName("regions");
         builder.Property(u => u.Role).HasColumnName("role");
     }
+
 }
