@@ -80,13 +80,15 @@ public class AuthController : Controller
     }
 
     [HttpPost("login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Login([FromBody] AuthorizationModel authModel)
     {
         var user = await _db.Users.Where(u => u.UserName == authModel.UserName).FirstOrDefaultAsync();
 
         if (user is null)
         {
-            return NotFound($"The user \'{authModel.UserName}\' was not found in the database!");
+            return BadRequest($"The user \'{authModel.UserName}\' was not found in the database!");
         }
 
         var match = AuthHelper.CheckPassword(authModel.Password, user);

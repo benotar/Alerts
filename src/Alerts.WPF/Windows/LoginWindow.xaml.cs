@@ -1,11 +1,13 @@
-﻿using System.Net.Http;
+﻿using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using Alerts.WPF.Data;
 using MaterialDesignThemes.Wpf;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alerts.WPF.Windows;
 
@@ -14,15 +16,15 @@ namespace Alerts.WPF.Windows;
 /// </summary>
 public partial class LoginWindow : Window
 {
-    
-    
-    public bool IsDarkTheme { get; set; }
+    private readonly DataContext _db = new();
+    private bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
 
     public LoginWindow()
     {
         _paletteHelper = new PaletteHelper();
+
 
         InitializeComponent();
     }
@@ -54,18 +56,27 @@ public partial class LoginWindow : Window
             string apiUrl = "https://localhost:44305/auth/login";
 
             var json = JsonSerializer.Serialize(new { UserName = userName, Password = userPassword });
-            
+
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync(apiUrl, content);
 
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show("Something went wrong!");
 
+                return;
+            }
 
-            MainContentWindow mainContentWindow = new(await response.Content.ReadAsStringAsync());
+            var loginUser = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
+            
+            MainContentWindow mainContentWindow = new(loginUser);
 
             mainContentWindow.ShowDialog();
+
+            this.Close();
         }
     }
 
@@ -73,8 +84,6 @@ public partial class LoginWindow : Window
     {
         throw new NotImplementedException();
     }
-
-    
 
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)

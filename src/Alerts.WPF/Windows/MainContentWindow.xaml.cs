@@ -1,20 +1,21 @@
 ﻿using System.Windows;
+using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Windows;
 
 public partial class MainContentWindow : Window
 {
-    private readonly string _temp;
+    private readonly UserModel _user;
     
-    public MainContentWindow(string temp)
+    public MainContentWindow(UserModel user)
     {
-        _temp = temp;
+        _user= user;
         
         InitializeComponent();
     }
 
     private void Load(object sender, RoutedEventArgs e)
     {
-        TempLabel.Content = _temp;
+        HelloUserLabel.Content += _user.UserName;
     }
 }

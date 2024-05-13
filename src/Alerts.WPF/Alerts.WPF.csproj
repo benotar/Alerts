@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,8 +28,10 @@
       </Content>
     </ItemGroup>
 
+    
+
     <ItemGroup>
-      <ProjectReference Include="..\Alerts.Backend\Alerts.WebApp\Alerts.WebApp.csproj" />
+      <Folder Include="Components\" />
     </ItemGroup>
 
 </Project>
