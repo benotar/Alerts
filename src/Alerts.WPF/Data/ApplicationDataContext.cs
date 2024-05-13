@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alerts.WPF.Data;
 
-public class DataContext : DbContext
+public class ApplicationDataContext : DbContext
 {
     public DbSet<User> Users { get; set; }
 

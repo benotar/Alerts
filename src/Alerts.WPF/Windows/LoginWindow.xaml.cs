@@ -16,7 +16,7 @@ namespace Alerts.WPF.Windows;
 /// </summary>
 public partial class LoginWindow : Window
 {
-    private readonly DataContext _db = new();
+    private readonly ApplicationDataContext _db = new();
     private bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
@@ -73,12 +73,10 @@ public partial class LoginWindow : Window
             //var user = response.Content.
             
             var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
-            
+
             MainContentWindow mainContentWindow = new(user);
 
-            mainContentWindow.ShowDialog();
-
-            this.Close();
+            mainContentWindow.Show();
         }
     }
 

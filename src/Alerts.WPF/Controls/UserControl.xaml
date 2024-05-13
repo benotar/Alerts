@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Alerts.WPF.Controls.UserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Alerts.WPF.Controls"
+             mc:Ignorable="d"
+             >
+    
+    <UserControl.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style.Setters>
+        </Style>
+        
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Width" Value="300"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Horizontal"
+                Margin="10">
+        
+        <Label Content="{Binding UserName, Mode=TwoWay}"
+               Margin="0 0 20 0 "
+               Style="{StaticResource LabelStyle}"
+               x:Name="UserNameLabel"/>
+        
+        <Label Content="|"
+               Margin="0 0 20 0 "
+               Style="{StaticResource LabelStyle}"
+               x:Name="TempLabel"/>
+        
+        <Label Content="{Binding Name, Mode=TwoWay}"
+               Margin="0 0 20 0 "
+               Style="{StaticResource LabelStyle}"
+               x:Name="NameUserLabel"/>
+        
+        <Label Content="|"
+               Margin="0 0 20 0 "
+               Style="{StaticResource LabelStyle}"
+               x:Name="TempLabel2"/>
+        
+        <Label Content="Регіони"
+               Margin="0 0 5 0 "
+               Style="{StaticResource LabelStyle}"
+               x:Name="RegionsLabel"/>
+        
+        <ComboBox Style="{StaticResource ComboBoxStyle}"
+                  x:Name="RegionsComboBox"
+                  Loaded="FillRegionsComboBox"/>
+    </StackPanel>
+</UserControl>

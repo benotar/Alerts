@@ -7,28 +7,37 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
         Title="MainContentWindow" Height="450" Width="800"
-        TextElement.Foreground="{DynamicResource MaterialDesignPaper}"
-        >
+        TextElement.Foreground="{DynamicResource MaterialDesignPaper}">
 
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Style.Setters>
-                <Setter Property="FontFamily" Value="Consolas"/>
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="18" />
             </Style.Setters>
         </Style>
     </Window.Resources>
     
-    <materialDesign:Card Loaded="Load">
-
-       <Label x:Name="HelloUserLabel"
-              Content="Hello, "
-              Style="{StaticResource LabelStyle}"
-              Margin="10 10 0 0"/>
-
-        
-        
-    </materialDesign:Card>
-
-
+    <StackPanel Loaded="Load"
+                x:Name="MainPanel">
+        <materialDesign:ColorZone Padding="16"
+                                  Mode="Dark">
+            <DockPanel>
+                <Label Content="Привіт, "
+                       Foreground="White"
+                       Style="{StaticResource LabelStyle}"
+                       x:Name="HelloUserLabel" />
+                <materialDesign:PopupBox HorizontalAlignment="Right"
+                                         StaysOpen="True"
+                                         PlacementMode="BottomAndAlignRightEdges">
+                    <StackPanel>
+                        <Button x:Name="ExitPopupBoxBtn"
+                                ToolTip="Close application"
+                                Content="Exit"
+                                Click="MainExitPopupBoxBtnOnClick" />
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </DockPanel>
+        </materialDesign:ColorZone>
+    </StackPanel>
 </Window>
