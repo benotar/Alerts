@@ -2,7 +2,7 @@
 
 namespace Alerts.WPF.Data.Models;
 
-public class UserModel
+public class User
 {
     [Column("id")]
     public long Id { get; set; }

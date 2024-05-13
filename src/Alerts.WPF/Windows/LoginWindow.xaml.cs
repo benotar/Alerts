@@ -70,9 +70,11 @@ public partial class LoginWindow : Window
                 return;
             }
 
-            var loginUser = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
+            //var user = response.Content.
             
-            MainContentWindow mainContentWindow = new(loginUser);
+            var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
+            
+            MainContentWindow mainContentWindow = new(user);
 
             mainContentWindow.ShowDialog();
 

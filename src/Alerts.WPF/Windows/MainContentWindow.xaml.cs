@@ -5,9 +5,9 @@ namespace Alerts.WPF.Windows;
 
 public partial class MainContentWindow : Window
 {
-    private readonly UserModel _user;
+    private readonly User _user;
     
-    public MainContentWindow(UserModel user)
+    public MainContentWindow(User user)
     {
         _user= user;
         
