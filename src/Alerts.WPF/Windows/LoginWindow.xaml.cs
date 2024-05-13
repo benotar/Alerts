@@ -73,7 +73,7 @@ public partial class LoginWindow : Window
             //var user = response.Content.
             
             var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
-
+            
             MainContentWindow mainContentWindow = new(user);
 
             mainContentWindow.Show();

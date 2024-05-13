@@ -7,21 +7,21 @@ namespace Alerts.WPF.Windows;
 
 public partial class MainContentWindow : Window
 {
-    private readonly User _user;
+    private User _user { get; set; }
     
     public MainContentWindow(User user)
     {
-        _user= user;
-        
         InitializeComponent();
+        
+        _user = user;
     }
 
     private void Load(object sender, RoutedEventArgs e)
     {
-        HelloUserLabel.Content += _user.UserName;
+         HelloUserLabel.Content += _user.UserName;
         
-        UserControl userControl = new(_user);
-
+        MyUserControl userControl = new(_user);
+        
         MainPanel.Children.Add(userControl);
     }
     

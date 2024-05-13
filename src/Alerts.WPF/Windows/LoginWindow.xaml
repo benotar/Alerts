@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
+        xmlns:models="clr-namespace:Alerts.WPF.Data.Models"
         mc:Ignorable="d"
         Title="LoginWindow" Height="760" Width="450"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -12,8 +13,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-
-
+    
     <materialDesign:Card UniformCornerRadius="15"
                          Background="{DynamicResource MaterialDesignPaper}"
                          Margin="25">
