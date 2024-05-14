@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Alerts.WPF.Controls;
 using Alerts.WPF.Data.Models;
-using MaterialDesignThemes.Wpf;
 
 namespace Alerts.WPF.Windows;
 
@@ -11,48 +10,77 @@ public partial class MainContentWindow : Window
 {
     private User _user { get; set; }
 
+    public Label SelectedRegionLabel;
+
+    private Label _regionLabel;
+    
+    private MyUserControl _userControl;
+
+    private StackPanel _selectedRegionStackPanel;
+    
     public MainContentWindow(User user)
     {
         InitializeComponent();
 
         _user = user;
 
-        DataContext = this;
+        SelectedRegionLabel = new Label();
+
+        _regionLabel = new Label();
+        
+        _selectedRegionStackPanel = new StackPanel();
+        
+        _userControl = new MyUserControl(this, _user);
     }
 
     private void Load(object sender, RoutedEventArgs e)
     {
-        HelloUserLabel.Content += _user?.UserName;
-
+        HelloUserLabel.Content += _user.UserName;
+        
         AddUserControl();
 
-        AddLabelSelectedRegion();
-    }
+        AddSelectedRegionStackPanel();
 
+    }
     private void MainExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
         Application.Current.Shutdown();
     }
-
     private void AddUserControl()
     {
-        MyUserControl userControl = new(_user);
+        MainPanel.Children.Add(_userControl);
 
-        MainPanel.Children.Add(userControl);
-
-        userControl.Margin = new Thickness(0, 0, 0, 15);
+        _userControl.Margin = new Thickness(0, 0, 0, 15);
+    }
+    private void AddSelectedRegionLabel()
+    {
+        SelectedRegionLabel.Content = "Порожньо";
+        
+        SelectedRegionLabel.Style = FindResource("LabelStyle") as Style;
+        
+        _selectedRegionStackPanel.Children.Add(SelectedRegionLabel);
     }
 
-    private void AddLabelSelectedRegion()
+    private void AddRegionLabel()
     {
-        Label regionLabel = new();
-
-        regionLabel.Content = "ТУТ БУДЕ ВИБРАНИЙ РЕГІОН";
+        _regionLabel.Style = FindResource("LabelStyle") as Style;
         
-        regionLabel.Style = FindResource("LabelStyle") as Style;
-        regionLabel.Foreground = Brushes.White;
+        _regionLabel.Content = "Вибраний регіон:";
+        
+        _regionLabel.Margin = new Thickness(0, 0, 15, 0);
 
-        MainPanel.Children.Add(regionLabel);
+        _selectedRegionStackPanel.Children.Add(_regionLabel);
+    }
+    
+    private void AddSelectedRegionStackPanel()
+    {
+        _selectedRegionStackPanel.Orientation = Orientation.Horizontal;
+
+        AddRegionLabel();
+        
+        AddSelectedRegionLabel();
+
+        MainPanel.Children.Add(_selectedRegionStackPanel);
     }
     
 }

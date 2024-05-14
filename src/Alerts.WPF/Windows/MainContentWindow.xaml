@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
+        xmlns:controls="clr-namespace:Alerts.WPF.Controls"
         mc:Ignorable="d"
         Title="MainContentWindow" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignPaper}">
@@ -14,11 +15,12 @@
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Consolas" />
                 <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
             </Style.Setters>
         </Style>
-        
+
     </Window.Resources>
-    
+
     <StackPanel Loaded="Load"
                 x:Name="MainPanel"
                 Background="#2F2F2F">
@@ -27,7 +29,6 @@
                                   Margin="0 0 0 20 ">
             <DockPanel>
                 <Label Content="Привіт, "
-                       Foreground="White"
                        Style="{StaticResource LabelStyle}"
                        x:Name="HelloUserLabel" />
                 <materialDesign:PopupBox HorizontalAlignment="Right"
@@ -43,5 +44,6 @@
             </DockPanel>
         </materialDesign:ColorZone>
         
+
     </StackPanel>
 </Window>
