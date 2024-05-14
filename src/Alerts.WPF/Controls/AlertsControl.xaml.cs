@@ -19,6 +19,20 @@ public partial class AlertsControl : UserControl
         if (!AlertsHelper.IsActiveAlert(_alert, _alert.LocationTitle))
         {
             IsActiveAlertLabel.Content = "Не активна";
+            
+            TypeAlertTempLabel.Content = TypeAlertLabel.Content = null;
+
+            DurationAlertTempLabel.Content = DurationAlertLabel.Content = null;
+
+            StartedAtAlertTempLabel.Content = StartedAtAlertLabel.Content = null;
+            
+            return;
         }
+
+        IsActiveAlertLabel.Content = "Активна";
+
+        StartedAtAlertLabel.Content = _alert.StartedAt.ToLongDateString();
+
+        DurationAlertLabel.Content = DateTime.Now.AddHours(2) - _alert.StartedAt;
     }
 }

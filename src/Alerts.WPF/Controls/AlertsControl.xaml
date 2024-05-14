@@ -24,7 +24,8 @@
                     Margin="10 10 0 10">
             <Label Style="{StaticResource LabelStyle}"
                    Content="Тривога в регіоні - "
-                   FontWeight="Bold"/>
+                   FontWeight="Bold"
+                   x:Name="IsActiveAlertTempLabel"/>
             
             <Label Style="{StaticResource LabelStyle}"
                    Content="Активна чи ні "
@@ -35,7 +36,8 @@
                     Margin="10 10 0 10">
             <Label Style="{StaticResource LabelStyle}"
                    Content="Тип тривоги(якщо активна(потім це прибрати) - "
-                   FontWeight="Bold"/>
+                   FontWeight="Bold"
+                   x:Name="TypeAlertTempLabel"/>
             
             <Label Style="{StaticResource LabelStyle}"
                    Content="Тип "
@@ -46,7 +48,8 @@
                     Margin="10 10 0 10">
             <Label Style="{StaticResource LabelStyle}"
                    Content="Тривалість тривоги(якщо активна(потім це прибрати) - "
-                   FontWeight="Bold"/>
+                   FontWeight="Bold"
+                   x:Name="DurationAlertTempLabel"/>
             
             <Label Style="{StaticResource LabelStyle}"
                    Content="Тривалість "
@@ -57,7 +60,8 @@
                     Margin="10 10 0 0">
             <Label Style="{StaticResource LabelStyle}"
                    Content="Коли почалась(якщо активна(потім це прибрати) - "
-                   FontWeight="Bold"/>
+                   FontWeight="Bold"
+                   x:Name="StartedAtAlertTempLabel"/>
             
             <Label Style="{StaticResource LabelStyle}"
                    Content="Старт дата "

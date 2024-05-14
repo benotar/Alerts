@@ -19,6 +19,8 @@ public partial class MainContentWindow : Window
     private StackPanel _selectedRegionStackPanel;
     
     private Button _getAlertForRegionButton;
+
+    private AlertsControl _alertsControl;
     
     public MainContentWindow(User user)
     {
@@ -35,6 +37,12 @@ public partial class MainContentWindow : Window
         _userControl = new MyUserControl(this, _user);
 
         _getAlertForRegionButton = new Button();
+
+        _alertsControl = new AlertsControl(new AlertsModels.Alerts
+        {
+            LocationTitle = _user.Regions.FirstOrDefault(r => r == "Дніпропетровсьddка область"),
+            StartedAt = DateTime.Now,
+        });
     }
 
     private void Load(object sender, RoutedEventArgs e)
@@ -45,8 +53,10 @@ public partial class MainContentWindow : Window
 
         AddSelectedRegionStackPanel();
 
+        AddAlertsControl();
+        
         AddGetAlertForRegionButton();
-
+        
     }
     private void MainExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
@@ -58,6 +68,14 @@ public partial class MainContentWindow : Window
 
         _userControl.Margin = new Thickness(15, 0, 0, 15);
     }
+
+    private void AddAlertsControl()
+    {
+        _alertsControl.Margin = new Thickness(0, 15, 0, 0);
+        
+        MainPanel.Children.Add(_alertsControl);
+    }
+    
     private void AddSelectedRegionLabel()
     {
         SelectedRegionLabel.Content = "Порожньо";
