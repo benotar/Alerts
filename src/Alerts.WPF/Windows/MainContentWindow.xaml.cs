@@ -18,6 +18,8 @@ public partial class MainContentWindow : Window
 
     private StackPanel _selectedRegionStackPanel;
     
+    private Button _getAlertForRegionButton;
+    
     public MainContentWindow(User user)
     {
         InitializeComponent();
@@ -31,6 +33,8 @@ public partial class MainContentWindow : Window
         _selectedRegionStackPanel = new StackPanel();
         
         _userControl = new MyUserControl(this, _user);
+
+        _getAlertForRegionButton = new Button();
     }
 
     private void Load(object sender, RoutedEventArgs e)
@@ -41,6 +45,8 @@ public partial class MainContentWindow : Window
 
         AddSelectedRegionStackPanel();
 
+        AddGetAlertForRegionButton();
+
     }
     private void MainExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
@@ -50,7 +56,7 @@ public partial class MainContentWindow : Window
     {
         MainPanel.Children.Add(_userControl);
 
-        _userControl.Margin = new Thickness(0, 0, 0, 15);
+        _userControl.Margin = new Thickness(15, 0, 0, 15);
     }
     private void AddSelectedRegionLabel()
     {
@@ -60,18 +66,16 @@ public partial class MainContentWindow : Window
         
         _selectedRegionStackPanel.Children.Add(SelectedRegionLabel);
     }
-
     private void AddRegionLabel()
     {
         _regionLabel.Style = FindResource("LabelStyle") as Style;
         
         _regionLabel.Content = "Вибраний регіон:";
         
-        _regionLabel.Margin = new Thickness(0, 0, 15, 0);
+        _regionLabel.Margin = new Thickness(15, 0, 15, 0);
 
         _selectedRegionStackPanel.Children.Add(_regionLabel);
     }
-    
     private void AddSelectedRegionStackPanel()
     {
         _selectedRegionStackPanel.Orientation = Orientation.Horizontal;
@@ -81,6 +85,21 @@ public partial class MainContentWindow : Window
         AddSelectedRegionLabel();
 
         MainPanel.Children.Add(_selectedRegionStackPanel);
+    }
+
+    private void AddGetAlertForRegionButton()
+    {
+        _getAlertForRegionButton.Style = FindResource("MaterialDesignOutlinedSecondaryButton") as Style;
+
+        _getAlertForRegionButton.Width = 270;
+        
+        _getAlertForRegionButton.Content = "Отримати актуальну інформацію";
+
+        _getAlertForRegionButton.HorizontalAlignment = HorizontalAlignment.Center;
+
+        _getAlertForRegionButton.Margin = new Thickness(0, 170, 0, 0);
+
+        MainPanel.Children.Add(_getAlertForRegionButton);
     }
     
 }

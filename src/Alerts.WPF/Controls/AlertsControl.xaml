@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Alerts.WPF.Controls.AlertsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Alerts.WPF.Controls"
+             mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
+            </Style.Setters>
+        </Style>
+
+    </UserControl.Resources>
+    
+    <StackPanel Background="#2F2F2F" Orientation="Vertical"
+                Loaded="Load">
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10 10 0 10">
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Тривога в регіоні - "
+                   FontWeight="Bold"/>
+            
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Активна чи ні "
+                   x:Name="IsActiveAlertLabel"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10 10 0 10">
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Тип тривоги(якщо активна(потім це прибрати) - "
+                   FontWeight="Bold"/>
+            
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Тип "
+                   x:Name="TypeAlertLabel"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10 10 0 10">
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Тривалість тривоги(якщо активна(потім це прибрати) - "
+                   FontWeight="Bold"/>
+            
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Тривалість "
+                   x:Name="DurationAlertLabel"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10 10 0 0">
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Коли почалась(якщо активна(потім це прибрати) - "
+                   FontWeight="Bold"/>
+            
+            <Label Style="{StaticResource LabelStyle}"
+                   Content="Старт дата "
+                   x:Name="StartedAtAlertLabel"/>
+        </StackPanel>
+
+        
+    </StackPanel>
+</UserControl>
