@@ -57,7 +57,6 @@
         
         <ComboBox Style="{StaticResource ComboBoxStyle}"
                   x:Name="RegionsComboBox"
-                  Loaded="FillRegionsComboBox"
-                  SelectionChanged="RegionSelectedChanged"/>
+                  Loaded="FillRegionsComboBox"/>
     </StackPanel>
 </UserControl>
