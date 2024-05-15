@@ -70,11 +70,11 @@ public partial class LoginWindow : Window
                 return;
             }
 
-            //var user = response.Content.
+            var token = await response.Content.ReadAsStringAsync();
             
             var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
             
-            MainContentWindow mainContentWindow = new(user);
+            MainContentWindow mainContentWindow = new(user, token);
 
             mainContentWindow.Show();
         }

@@ -51,7 +51,6 @@ public class AlertsController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetActiveAlertsByOblasts()
     {
         if (!User.Identity.IsAuthenticated)
@@ -72,7 +71,7 @@ public class AlertsController : Controller
 
         if (IsNullOrEmpty(result))
         {
-            return NotFound();
+            return BadRequest();
         }
 
         return Ok(result);
@@ -118,7 +117,7 @@ public class AlertsController : Controller
         
         if (IsNullOrEmpty(result))
         {
-            return NotFound();
+            return BadRequest();
         }
 
         return Ok(result);

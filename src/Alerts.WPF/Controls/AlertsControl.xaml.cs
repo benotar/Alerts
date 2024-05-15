@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Windows;
 using System.Windows.Controls;
 using Alerts.WPF.Hepler;
 
@@ -6,33 +9,103 @@ namespace Alerts.WPF.Controls;
 
 public partial class AlertsControl : UserControl
 {
-    private readonly AlertsModels.Alerts _alert;
-    public AlertsControl(AlertsModels.Alerts alert)
+    public int _oblastId { get; set; }
+
+    public readonly string _token;
+
+    public AlertsControl(int oblastId, string token)
     {
         InitializeComponent();
-        
-        _alert = alert;
+
+        _oblastId = oblastId;
+
+        _token = TrimCharToken(token);
     }
 
-    private void Load(object sender, RoutedEventArgs e)
+    private async void Load(object sender, RoutedEventArgs e)
     {
-        if (!AlertsHelper.IsActiveAlert(_alert, _alert.LocationTitle))
+        // IsActiveAlertLabel.Content = null;
+        //
+        // if (!AlertsHelper.IsValidOblastId(_oblastId))
+        // {
+        //     MessageBox.Show("Invalid oblast");
+        //
+        //     return;
+        // }
+        //
+        // var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
+        //
+        // using (var httpClient = new HttpClient())
+        // {
+        //     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+        //
+        //     var response = await httpClient.GetAsync(url);
+        //
+        //     var content = await response.Content.ReadAsStringAsync();
+        //
+        //     switch (content)
+        //     {
+        //         case "N":
+        //             IsActiveAlertLabel.Content = "Немає інформації про тримогу";
+        //             return;
+        //         case "P":
+        //             IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";
+        //             return;
+        //     }
+        //
+        //     IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
+        // }
+
+        RefreshData();
+    }
+
+    public async void RefreshData()
+    {
+        IsActiveAlertLabel.Content = null;
+        
+        if (!AlertsHelper.IsValidOblastId(_oblastId))
         {
-            IsActiveAlertLabel.Content = "Не активна";
-            
-            TypeAlertTempLabel.Content = TypeAlertLabel.Content = null;
+            MessageBox.Show("Invalid oblast");
 
-            DurationAlertTempLabel.Content = DurationAlertLabel.Content = null;
-
-            StartedAtAlertTempLabel.Content = StartedAtAlertLabel.Content = null;
-            
             return;
         }
 
-        IsActiveAlertLabel.Content = "Активна";
+        var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
 
-        StartedAtAlertLabel.Content = _alert.StartedAt.ToLongDateString();
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
-        DurationAlertLabel.Content = DateTime.Now.AddHours(2) - _alert.StartedAt;
+            var response = await httpClient.GetAsync(url);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                MessageBox.Show($"Error :{response.StatusCode}");
+
+                return;
+            }
+            
+            var content = await response.Content.ReadAsStringAsync();
+
+            content = content.Trim('"');
+
+            switch (content)
+            {
+                case "N":
+                    IsActiveAlertLabel.Content = "Немає немає інформації про повітряну тривогу";
+                    return;
+                case "P":
+                    IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";
+                    return;
+            }
+
+            IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
+        }
     }
+
+    private static string TrimCharToken(string token)
+    {
+        return token.Trim('"');
+    }
+    
 }
