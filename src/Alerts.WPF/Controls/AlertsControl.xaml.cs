@@ -27,44 +27,12 @@ public partial class AlertsControl : UserControl
         _token = TrimCharToken(token);
     }
 
-    private async void Load(object sender, RoutedEventArgs e)
+    private void Load(object sender, RoutedEventArgs e)
     {
-        // IsActiveAlertLabel.Content = null;
-        //
-        // if (!AlertsHelper.IsValidOblastId(_oblastId))
-        // {
-        //     MessageBox.Show("Invalid oblast");
-        //
-        //     return;
-        // }
-        //
-        // var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
-        //
-        // using (var httpClient = new HttpClient())
-        // {
-        //     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-        //
-        //     var response = await httpClient.GetAsync(url);
-        //
-        //     var content = await response.Content.ReadAsStringAsync();
-        //
-        //     switch (content)
-        //     {
-        //         case "N":
-        //             IsActiveAlertLabel.Content = "Немає інформації про тримогу";
-        //             return;
-        //         case "P":
-        //             IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";
-        //             return;
-        //     }
-        //
-        //     IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
-        // }
-
-        RefreshData();
+        GetActualData();
     }
 
-    public async void RefreshData()
+    public async void GetActualData()
     {
         IsActiveAlertLabel.Content = null;
 
@@ -92,7 +60,6 @@ public partial class AlertsControl : UserControl
         }
 
         IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
-        //}
     }
 
     private void Unload(object sender, RoutedEventArgs e)

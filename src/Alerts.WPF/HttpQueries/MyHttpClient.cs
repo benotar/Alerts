@@ -71,6 +71,8 @@ public class MyHttpClient : IDisposable
     
     public async Task<T?> PostAsync<T>(string url, object body)
     {
+        EnsureHttpClient();
+        
         var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
 
         try

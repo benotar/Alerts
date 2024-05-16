@@ -62,7 +62,7 @@ public partial class MainContentWindow : Window
         Application.Current.Shutdown();
     }
     
-    private void GetAlertForRegionButtonOnClick(object sender, RoutedEventArgs e)
+    private async void GetAlertForRegionButtonOnClick(object sender, RoutedEventArgs e)
     {
         var location = SelectedRegionLabel.Content.ToString();
 
@@ -96,7 +96,7 @@ public partial class MainContentWindow : Window
 
         existingControl._oblastId = oblastId;
         
-        existingControl.RefreshData();
+        existingControl.GetActualData();
     }
     
     private void AddUserControl()
@@ -105,8 +105,6 @@ public partial class MainContentWindow : Window
 
         _userControl.Margin = new Thickness(15, 0, 0, 15);
     }
-
-    
     
     private void AddSelectedRegionLabel()
     {
@@ -116,6 +114,7 @@ public partial class MainContentWindow : Window
         
         _selectedRegionStackPanel.Children.Add(SelectedRegionLabel);
     }
+    
     private void AddRegionLabel()
     {
         _regionLabel.Style = FindResource("LabelStyle") as Style;
@@ -126,6 +125,7 @@ public partial class MainContentWindow : Window
 
         _selectedRegionStackPanel.Children.Add(_regionLabel);
     }
+    
     private void AddSelectedRegionStackPanel()
     {
         _selectedRegionStackPanel.Orientation = Orientation.Horizontal;
