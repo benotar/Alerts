@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Controls;
 using Alerts.WPF.Hepler;
+using Alerts.WPF.HttpQueries;
 
 namespace Alerts.WPF.Controls;
 
@@ -11,12 +12,16 @@ public partial class AlertsControl : UserControl
 {
     public int _oblastId { get; set; }
 
-    public readonly string _token;
+    private readonly string _token;
+
+    private MyHttpClient _httpClient;
 
     public AlertsControl(int oblastId, string token)
     {
         InitializeComponent();
 
+        _httpClient = new MyHttpClient();
+        
         _oblastId = oblastId;
 
         _token = TrimCharToken(token);
@@ -62,7 +67,7 @@ public partial class AlertsControl : UserControl
     public async void RefreshData()
     {
         IsActiveAlertLabel.Content = null;
-        
+
         if (!AlertsHelper.IsValidOblastId(_oblastId))
         {
             MessageBox.Show("Invalid oblast");
@@ -71,41 +76,32 @@ public partial class AlertsControl : UserControl
         }
 
         var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
+        
+        var content = await _httpClient.GetWithTokenAsync<string>(url, _token);
+        
+        content = content.Trim('"');
 
-        using (var httpClient = new HttpClient())
+        switch (content)
         {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-
-            var response = await httpClient.GetAsync(url);
-
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                MessageBox.Show($"Error :{response.StatusCode}");
-
+            case "N":
+                IsActiveAlertLabel.Content = "Немає немає інформації про повітряну тривогу";
                 return;
-            }
-            
-            var content = await response.Content.ReadAsStringAsync();
-
-            content = content.Trim('"');
-
-            switch (content)
-            {
-                case "N":
-                    IsActiveAlertLabel.Content = "Немає немає інформації про повітряну тривогу";
-                    return;
-                case "P":
-                    IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";
-                    return;
-            }
-
-            IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
+            case "P":
+                IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";
+                return;
         }
+
+        IsActiveAlertLabel.Content = "Повітряна тривога активна в усій області";
+        //}
     }
 
+    private void Unload(object sender, RoutedEventArgs e)
+    {
+        _httpClient.Dispose();
+    }
+    
     private static string TrimCharToken(string token)
     {
         return token.Trim('"');
     }
-    
 }

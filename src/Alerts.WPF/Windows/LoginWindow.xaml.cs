@@ -1,13 +1,10 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Alerts.WPF.Data;
+using Alerts.WPF.HttpQueries;
 using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore;
+using static System.String;
 
 namespace Alerts.WPF.Windows;
 
@@ -16,17 +13,22 @@ namespace Alerts.WPF.Windows;
 /// </summary>
 public partial class LoginWindow : Window
 {
-    private readonly ApplicationDataContext _db = new();
+    private readonly ApplicationDataContext _db;
     private bool IsDarkTheme { get; set; }
 
     private readonly PaletteHelper _paletteHelper;
 
+    private MyHttpClient _httpClient;
+
     public LoginWindow()
     {
+        InitializeComponent();
+
+        _db = new ApplicationDataContext();
+
         _paletteHelper = new PaletteHelper();
 
-
-        InitializeComponent();
+        _httpClient = new MyHttpClient();
     }
 
     private void ToggleTheme(object sender, RoutedEventArgs e)
@@ -51,40 +53,28 @@ public partial class LoginWindow : Window
 
         var userPassword = UserPasswordBox.Password;
 
-        using (var httpClient = new HttpClient())
+        const string apiUrl = "https://localhost:44305/auth/login";
+        
+        var token = await _httpClient.PostAsync<string>(apiUrl, new { UserName = userName, Password = userPassword });
+
+        if (IsNullOrEmpty(token))
         {
-            string apiUrl = "https://localhost:44305/auth/login";
-
-            var json = JsonSerializer.Serialize(new { UserName = userName, Password = userPassword });
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await httpClient.PostAsync(apiUrl, content);
-
-            if (response.StatusCode == HttpStatusCode.BadRequest)
-            {
-                MessageBox.Show("Something went wrong!");
-
-                return;
-            }
-
-            var token = await response.Content.ReadAsStringAsync();
             
-            var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
-            
-            MainContentWindow mainContentWindow = new(user, token);
-
-            mainContentWindow.Show();
         }
+
+        _httpClient.Dispose();
+        
+        var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
+
+        MainContentWindow mainContentWindow = new(user!, token);
+
+        mainContentWindow.Show();
     }
 
     private void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
     {
         throw new NotImplementedException();
     }
-
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
