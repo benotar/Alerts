@@ -1,0 +1,91 @@
+﻿<Window x:Class="Alerts.WPF.Windows.RegisterWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Alerts.WPF.Windows"
+        mc:Ignorable="d"
+        Title="CreateAccountWindow" Height="530" Width="450"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Margin" Value="0 25 0 0 "/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}"
+                         Margin="25">
+
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="CreateDialogHost">
+            <StackPanel>
+                
+                <Label Content="Опинитись тут це крута ідея!"
+                       Style="{StaticResource LabelStyle}"/>
+                
+                <TextBox x:Name="CreateLoginTextBlock"
+                         Margin="0 30 0 20"
+                         Width="300"
+                         FontSize="18"
+                         FontFamily="Consolas"
+                         materialDesign:HintAssist.Hint="Введіть ім'я користувача"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <TextBox x:Name="CreateNameTextBlock"
+                         Margin="0 0 0 20"
+                         Width="300"
+                         FontSize="18"
+                         FontFamily="Consolas"
+                         materialDesign:HintAssist.Hint="Введіть власне ім'я"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <PasswordBox x:Name="CreateUserPasswordBox"
+                             Margin="0 0 0 20"
+                             Width="300"
+                             FontSize="18"
+                             materialDesign:HintAssist.Hint="Введіть пароль"
+                             FontFamily="Consolas"
+                             BorderBrush="{DynamicResource MaterialDesignDivider}"
+                             Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" />
+
+                <PasswordBox x:Name="ConfirmUserPasswordBox"
+                             Margin="0 0 0 20"
+                             Width="300"
+                             FontSize="18"
+                             materialDesign:HintAssist.Hint="Повторіть пароль"
+                             FontFamily="Consolas"
+                             BorderBrush="{DynamicResource MaterialDesignDivider}"
+                             Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" />
+
+                <Button Margin="0 0 0 0"
+                        Content="Створити"
+                        FontWeight="SemiBold"
+                        FontSize="18"
+                        FontFamily="Consolas"
+                        x:Name="CreateAccountBtn"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Height="53"
+                        Width="300"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Click="CreateAccountBtnOnClick" />
+
+            </StackPanel>
+
+        </materialDesign:DialogHost>
+
+    </materialDesign:Card>
+
+</Window>

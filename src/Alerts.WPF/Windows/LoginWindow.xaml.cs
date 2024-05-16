@@ -44,7 +44,7 @@ public partial class LoginWindow : Window
 
     private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
-        System.Windows.Application.Current.Shutdown();
+        Application.Current.Shutdown();
     }
 
     private async void LoginBtnOnClick(object sender, RoutedEventArgs e)
@@ -56,12 +56,7 @@ public partial class LoginWindow : Window
         const string apiUrl = "https://localhost:44305/auth/login";
         
         var token = await _httpClient.PostAsync<string>(apiUrl, new { UserName = userName, Password = userPassword });
-
-        if (IsNullOrEmpty(token))
-        {
-            
-        }
-
+        
         _httpClient.Dispose();
         
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
@@ -73,7 +68,9 @@ public partial class LoginWindow : Window
 
     private void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        RegisterWindow registerWindow = new RegisterWindow(_db);
+        
+        registerWindow.Show();
     }
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
