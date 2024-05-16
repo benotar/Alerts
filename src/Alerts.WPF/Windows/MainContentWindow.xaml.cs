@@ -147,7 +147,7 @@ public partial class MainContentWindow : Window
     {
         _getAlertForRegionButton.Style = FindResource("MaterialDesignOutlinedSecondaryButton") as Style;
 
-        _getAlertForRegionButton.Width = 270;
+        _getAlertForRegionButton.Width = 255;
         
         _getAlertForRegionButton.Content = "Отримати актуальну інформацію";
 
@@ -155,7 +155,7 @@ public partial class MainContentWindow : Window
 
         _getAlertForRegionButton.VerticalAlignment = VerticalAlignment.Center;
 
-        _getAlertForRegionButton.Margin = new Thickness(0, -33, 20, 0);
+        _getAlertForRegionButton.Margin = new Thickness(0, -33, 12, 0);
 
         _getAlertForRegionButton.Click += GetAlertForRegionButtonOnClick;
 

@@ -23,9 +23,9 @@
                 Unloaded="Unload">
         
         <StackPanel Orientation="Horizontal"
-                    Margin="0 10 10 10">
+                    Margin="10">
             <Label Style="{StaticResource LabelStyle}"
-                   Content="Тривога в регіоні - "
+                   Content="Тривога в регіоні -"
                    x:Name="IsActiveAlertTempLabel"/>
             
             <Label Style="{StaticResource LabelStyle}"
