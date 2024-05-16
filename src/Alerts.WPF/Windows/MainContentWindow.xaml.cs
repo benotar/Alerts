@@ -74,6 +74,12 @@ public partial class MainContentWindow : Window
         }
         
         AddAlertControl(location);
+
+        _getAlertForRegionButton.IsEnabled = false;
+
+        await Task.Delay(4000);
+
+        _getAlertForRegionButton.IsEnabled = true;
     }
     private void AddAlertControl(string location)
     {
