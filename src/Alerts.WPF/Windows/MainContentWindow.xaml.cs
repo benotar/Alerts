@@ -162,5 +162,9 @@ public partial class MainContentWindow : Window
         MainPanel.Children.Add(_getAlertForRegionButton);
     }
 
-    
+
+    private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
