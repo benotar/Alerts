@@ -77,7 +77,7 @@ public partial class MainContentWindow : Window
 
         _getAlertForRegionButton.IsEnabled = false;
 
-        await Task.Delay(4000);
+        await Task.Delay(5000);
 
         _getAlertForRegionButton.IsEnabled = true;
     }

@@ -42,22 +42,27 @@ public partial class LoginWindow : Window
         _paletteHelper.SetTheme(theme);
     }
 
-    private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Shutdown();
-    }
-
     private async void LoginBtnOnClick(object sender, RoutedEventArgs e)
     {
         var userName = UserNameTxtBox.Text;
 
         var userPassword = UserPasswordBox.Password;
 
+        if (IsNullOrEmpty(userName) || IsNullOrEmpty(userPassword))
+        {
+            MessageBox.Show("Відсутні дані про користувача!");
+
+            return;
+        }
+
         const string apiUrl = "https://localhost:44305/auth/login";
-        
+
         var token = await _httpClient.PostAsync<string>(apiUrl, new { UserName = userName, Password = userPassword });
-        
-        _httpClient.Dispose();
+
+        if (token is null)
+        {
+            return;
+        }
         
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
 
@@ -68,9 +73,15 @@ public partial class LoginWindow : Window
 
     private void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
     {
-        RegisterWindow registerWindow = new RegisterWindow(_db);
-        
+        var registerWindow = new RegisterWindow();
+
         registerWindow.Show();
+    }
+
+
+    private void ExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
     }
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -78,5 +89,11 @@ public partial class LoginWindow : Window
         base.OnMouseLeftButtonDown(e);
 
         DragMove();
+    }
+    
+    
+    private void Unload(object sender, RoutedEventArgs e)
+    {
+        _httpClient.Dispose();
     }
 }

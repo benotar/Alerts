@@ -16,7 +16,8 @@
     
     <materialDesign:Card UniformCornerRadius="15"
                          Background="{DynamicResource MaterialDesignPaper}"
-                         Margin="25">
+                         Margin="25"
+                         Unloaded="Unload">
 
         <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
 
