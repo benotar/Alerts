@@ -16,7 +16,8 @@
             </Style.Setters>
         </Style>
         
-        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox"
+               x:Name="RegionsComboBox">
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Consolas"/>
                 <Setter Property="FontSize" Value="18"/>

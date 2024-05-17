@@ -81,11 +81,18 @@ public partial class MainContentWindow : Window
 
         _getAlertForRegionButton.IsEnabled = true;
     }
+    
+    private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        var addRegionWindow = new AddRegionWindow(_userControl,_token, _user.Id);
+        
+        addRegionWindow.Show();
+    }
+    
     private void AddAlertControl(string location)
     {
         var oblastId = AlertsHelper.GetOblastIdByLocationTitle(location);
-
-
+        
         var existingControl = MainPanel.Children.OfType<AlertsControl>()
             .FirstOrDefault();
 
@@ -160,11 +167,5 @@ public partial class MainContentWindow : Window
         _getAlertForRegionButton.Click += GetAlertForRegionButtonOnClick;
 
         MainPanel.Children.Add(_getAlertForRegionButton);
-    }
-
-
-    private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -35,7 +35,8 @@
         
     </UserControl.Resources>
     
-    <StackPanel Background="#2F2F2F">
+    <StackPanel Background="#2F2F2F"
+                Unloaded="Unload">
         
         <StackPanel Orientation="Horizontal"
                     Margin="30 30 30 30">
@@ -44,6 +45,7 @@
             
             <TextBox x:Name="RegionTextBox"
                      Width="300"
+                     VerticalAlignment="Center"
                      Style="{StaticResource TextBoxStyle}"/>
             
         </StackPanel>

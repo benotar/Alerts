@@ -66,7 +66,44 @@ public class MyHttpClient : IDisposable
 
             return default;
         }
+    }
 
+
+    public async Task<bool> PutWithTokenAsync(string url, string token)
+    {
+        EnsureHttpClient();
+        
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        
+        var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+        
+        try
+        {
+            var response = await _httpClient.PutAsync(url, content);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                MessageBox.Show($"Error :{response.StatusCode}");
+
+                return false;
+            }
+            
+            response.EnsureSuccessStatusCode();
+
+            return true;
+        }
+        catch (HttpRequestException ex)
+        {
+            MessageBox.Show($"HTTP error: {ex.Message}");
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+            
+            return false;
+        }
     }
     
     public async Task<T?> PostAsync<T>(string url, object body)
