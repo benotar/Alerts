@@ -4,73 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Alerts.WPF.Controls"
-             mc:Ignorable="d">
-    
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Width="510" Height="210">
+
     <UserControl.Resources>
-        <Style TargetType="Label"
-               x:Key="LabelStyle">
-            <Style.Setters>
-                <Setter Property="FontFamily" Value="Consolas"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Foreground" Value="White"/>
-            </Style.Setters>
-        </Style>
-        
-        <Style TargetType="TextBox"
-               x:Key="TextBoxStyle">
-            <Style.Setters>
-                <Setter Property="FontFamily" Value="Consolas"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Foreground" Value="#2F2F2F"/>
-            </Style.Setters>
-        </Style>
-        
-        <Style TargetType="Button"
-               x:Key="ButtonStyle">
-            <Style.Setters>
-                <Setter Property="FontFamily" Value="Consolas"/>
-                <Setter Property="FontSize" Value="18"/>
-            </Style.Setters>
-        </Style>
-        
+
+
     </UserControl.Resources>
-    
+
     <StackPanel Background="#2F2F2F"
                 Unloaded="Unload">
-        
+
         <StackPanel Orientation="Horizontal"
                     Margin="30 30 30 30">
-            <Label Style="{StaticResource LabelStyle}"
-                   Content="Введіть регіон: "/>
-            
-            <TextBox x:Name="RegionTextBox"
-                     Width="300"
-                     VerticalAlignment="Center"
-                     Style="{StaticResource TextBoxStyle}"/>
-            
+
+            <ComboBox x:Name="RegionTextBox"
+                      Margin="0 10 0 0"
+                      Width="450"
+                      VerticalAlignment="Center"
+                      materialDesign:HintAssist.Hint="Виберіть регіон"
+                      FontSize="18"
+                      FontFamily="Consolas"
+                      Loaded="AddRegionsControlLoaded"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" />
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="0 0 0 30">
-            
+
             <Button Width="200"
                     Height="35"
                     Content="Додати"
-                    Margin="0 0 0 0"
                     FontSize="16"
                     x:Name="AddRegionBtn"
-                    Click="AddRegionBtnOnClick"/>
-        
+                    Click="AddRegionBtnOnClick" />
+
             <Button Width="200"
                     Height="35"
                     Content="Відміна"
                     Margin="50 0 0 0"
                     FontSize="16"
                     x:Name="AddRegionCancelBtn"
-                    Click="AddRegionCancelBtnOnClick"/>
-            
+                    Click="AddRegionCancelBtnOnClick" />
+
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>

@@ -84,9 +84,11 @@ public partial class MainContentWindow : Window
     
     private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
-        var addRegionWindow = new AddRegionWindow(_userControl,_token, _user.Id);
+        var addRegionWindow = new AddRegionWindow(this, _userControl,_token, _user.Id);
         
         addRegionWindow.Show();
+        
+        this.Hide();
     }
     
     private void AddAlertControl(string location)

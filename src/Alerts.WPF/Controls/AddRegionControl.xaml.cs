@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
 using Alerts.WPF.Windows;
 
@@ -10,6 +11,8 @@ public partial class AddRegionControl : UserControl
     private readonly MyHttpClient _httpClient;
 
     private readonly AddRegionWindow _addRegionWindow;
+    
+    private readonly MainContentWindow _mainContentWindow;
 
     private readonly MyUserControl _userControl;
     
@@ -17,13 +20,15 @@ public partial class AddRegionControl : UserControl
 
     private readonly long _userId;
     
-    public AddRegionControl(AddRegionWindow addRegionWindow, MyUserControl userControl,string token, long userId)
+    public AddRegionControl(AddRegionWindow addRegionWindow, MainContentWindow mainContentWindow ,MyUserControl userControl,string token, long userId)
     {
         InitializeComponent();
 
         _httpClient = new MyHttpClient();
 
         _addRegionWindow = addRegionWindow;
+        
+        _mainContentWindow = mainContentWindow;
 
         _userControl = userControl;
         
@@ -50,6 +55,9 @@ public partial class AddRegionControl : UserControl
         _userControl.Fill();
         
         _addRegionWindow.Close();
+        
+        // TODO доробити відкривання головного вікна та виправити ексепшн минулий 
+        _mainContentWindow.Show();
     }
 
     private void AddRegionCancelBtnOnClick(object sender, RoutedEventArgs e)
@@ -61,4 +69,20 @@ public partial class AddRegionControl : UserControl
     {
         _httpClient.Dispose();
     }
+
+    private void AddRegionsControlLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ComboBox comboBox)
+        {
+            MessageBox.Show("Не вдалось отримати список доступних регіонів!");
+            
+            return;
+        }
+
+        foreach (var region in AlertsHelper.AllLocationsString.Values)
+        {
+            comboBox.Items.Add(region);
+        }
+    }
+    
 }

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
-        mc:Ignorable="d" Width="520" Height="185"
+        mc:Ignorable="d" Width="510" Height="210"
         Title="AddRegionWindow"
         WindowStartupLocation="CenterScreen">
     
