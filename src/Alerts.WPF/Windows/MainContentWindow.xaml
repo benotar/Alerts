@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
-        Title="MainContentWindow" Height="270" Width="800"
+        Title="MainContentWindow" Height="290" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignPaper}"
         WindowStartupLocation="CenterScreen">
 

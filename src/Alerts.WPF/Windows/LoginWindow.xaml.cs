@@ -27,17 +27,17 @@ public partial class LoginWindow : Window
         _db = new ApplicationDataContext();
 
         _paletteHelper = new PaletteHelper();
+        
+        SetDarkTheme();
 
         _httpClient = new MyHttpClient();
     }
 
-    private void ToggleTheme(object sender, RoutedEventArgs e)
+    private void SetDarkTheme()
     {
-        ITheme theme = _paletteHelper.GetTheme();
+        var theme = _paletteHelper.GetTheme();
 
-        IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark;
-
-        theme.SetBaseTheme(IsDarkTheme ? Theme.Light : Theme.Dark);
+        theme.SetBaseTheme(Theme.Dark);
 
         _paletteHelper.SetTheme(theme);
     }
@@ -63,7 +63,7 @@ public partial class LoginWindow : Window
         {
             return;
         }
-        
+
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
 
         MainContentWindow mainContentWindow = new(user!, token);
@@ -90,8 +90,8 @@ public partial class LoginWindow : Window
 
         DragMove();
     }
-    
-    
+
+
     private void Unload(object sender, RoutedEventArgs e)
     {
         _httpClient.Dispose();

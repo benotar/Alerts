@@ -30,21 +30,7 @@
                                          PlacementMode="BottomAndAlignRightEdges">
 
                     <StackPanel>
-
-                        <StackPanel Margin="16 10 0 6"
-                                    HorizontalAlignment="Center"
-                                    Orientation="Horizontal">
-
-                            <TextBlock VerticalAlignment="Center" Text="Темний режим" />
-
-                            <ToggleButton Cursor="Hand" ToolTip="Увімкнути темний режим"
-                                          Margin="12 0 8 0 "
-                                          x:Name="ThemeToggle"
-                                          IsChecked="{Binding IsDarkTheme}"
-                                          Click="ToggleTheme" />
-
-                        </StackPanel>
-
+                        
                         <Button x:Name="ExitPopupBoxBtn"
                                 ToolTip="Close application"
                                 Content="Exit"
