@@ -63,7 +63,11 @@ public partial class RegisterWindow : Window
 
     private void CreateAccountExitBtnOnClick(object sender, RoutedEventArgs e)
     {
-        Close();
+        var loginWindow = new LoginWindow();
+        
+        this.Close();
+        
+        loginWindow.Show();
     }
     
 }

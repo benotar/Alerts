@@ -87,9 +87,9 @@ public partial class AddRegionControl : UserControl
     
     private void ReOpenMainWindow()
     {
-        _addRegionWindow.Close();
-        
         var mainContentWindow = new MainContentWindow(_user, _token);
+        
+        _addRegionWindow.Close();
         
         mainContentWindow.Show();
     }

@@ -90,10 +90,6 @@ public partial class MainContentWindow : Window
     private void OpenAddRegionWindow()
     {
         var addRegionWindow = new AddRegionWindow(_userControl, _token, _user);
-
-        //addRegionWindow.Closed += (sender, e) => this.Show();
-        
-        //this.Hide();
         
         this.Close();
         

@@ -68,6 +68,8 @@ public partial class LoginWindow : Window
 
         MainContentWindow mainContentWindow = new(user!, token);
 
+        this.Close();
+        
         mainContentWindow.Show();
     }
 
@@ -75,6 +77,8 @@ public partial class LoginWindow : Window
     {
         var registerWindow = new RegisterWindow();
 
+        this.Close();
+        
         registerWindow.Show();
     }
 
