@@ -84,11 +84,20 @@ public partial class MainContentWindow : Window
     
     private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
-        var addRegionWindow = new AddRegionWindow(this, _userControl,_token, _user.Id);
+        OpenAddRegionWindow();
+    }
+
+    private void OpenAddRegionWindow()
+    {
+        var addRegionWindow = new AddRegionWindow(_userControl, _token, _user);
+
+        //addRegionWindow.Closed += (sender, e) => this.Show();
+        
+        //this.Hide();
+        
+        this.Close();
         
         addRegionWindow.Show();
-        
-        this.Hide();
     }
     
     private void AddAlertControl(string location)
@@ -100,10 +109,11 @@ public partial class MainContentWindow : Window
 
         if (existingControl is null)
         {
-            _alertsControl = new AlertsControl(oblastId, _token);
-        
-            _alertsControl.Margin = new Thickness(0, 15, 0, 0);
-            
+            _alertsControl = new AlertsControl(oblastId, _token)
+            {
+                Margin = new Thickness(0, 15, 0, 0)
+            };
+
             MainPanel.Children.Add(_alertsControl);
             
             return;

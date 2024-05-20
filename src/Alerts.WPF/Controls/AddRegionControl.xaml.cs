@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
 using Alerts.WPF.Windows;
@@ -10,38 +11,34 @@ public partial class AddRegionControl : UserControl
 {
     private readonly MyHttpClient _httpClient;
 
+    private readonly MyUserControl _userControl;
+
     private readonly AddRegionWindow _addRegionWindow;
     
-    private readonly MainContentWindow _mainContentWindow;
-
-    private readonly MyUserControl _userControl;
-    
     private readonly string _token;
-
-    private readonly long _userId;
     
-    public AddRegionControl(AddRegionWindow addRegionWindow, MainContentWindow mainContentWindow ,MyUserControl userControl,string token, long userId)
+    private readonly User _user;
+    
+    public AddRegionControl(AddRegionWindow addRegionWindow, MyUserControl userControl,string token, User user)
     {
         InitializeComponent();
 
         _httpClient = new MyHttpClient();
+        
+        _userControl = userControl;
 
         _addRegionWindow = addRegionWindow;
         
-        _mainContentWindow = mainContentWindow;
-
-        _userControl = userControl;
-        
         _token = token;
 
-        _userId = userId;
+        _user = user;
     }
 
     private async void AddRegionBtnOnClick(object sender, RoutedEventArgs e)
     {
         var region = RegionTextBox.Text;
 
-        var apiUrl = $"https://localhost:44305/userApi/AddRegion/{_userId}/{region}";
+        var apiUrl = $"https://localhost:44305/userApi/AddRegion/{_user.Id}/{region}";
 
         var result = await _httpClient.PutWithTokenAsync(apiUrl, _token);
 
@@ -50,19 +47,18 @@ public partial class AddRegionControl : UserControl
             return;
         }
 
+        _user.Regions.Add(region);
+        
         MessageBox.Show($"Регіон \'{region}\' успішно додано!");
 
-        _userControl.Fill();
-        
-        _addRegionWindow.Close();
-        
-        // TODO доробити відкривання головного вікна та виправити ексепшн минулий 
-        _mainContentWindow.Show();
+        _userControl.FillRegionsComboBox();
+
+        ReOpenMainWindow();
     }
 
     private void AddRegionCancelBtnOnClick(object sender, RoutedEventArgs e)
     {
-       _addRegionWindow.Close();
+        ReOpenMainWindow();
     }
 
     private void Unload(object sender, RoutedEventArgs e)
@@ -79,10 +75,22 @@ public partial class AddRegionControl : UserControl
             return;
         }
 
-        foreach (var region in AlertsHelper.AllLocationsString.Values)
+        var validRegions = AlertsHelper.AlertsLocation.Values
+            .Where(region =>
+                !_user.Regions.Contains(region));
+
+        foreach (var region in validRegions)
         {
             comboBox.Items.Add(region);
         }
     }
     
+    private void ReOpenMainWindow()
+    {
+        _addRegionWindow.Close();
+        
+        var mainContentWindow = new MainContentWindow(_user, _token);
+        
+        mainContentWindow.Show();
+    }
 }

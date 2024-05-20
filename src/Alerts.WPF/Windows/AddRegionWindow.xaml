@@ -8,8 +8,7 @@
         Title="AddRegionWindow"
         WindowStartupLocation="CenterScreen">
     
-    <StackPanel Loaded="Load"
-                x:Name="AddRegionWindowStackPanel">
+    <Grid x:Name="AddRegionWindowGrid">
         
-    </StackPanel>
+    </Grid>
 </Window>

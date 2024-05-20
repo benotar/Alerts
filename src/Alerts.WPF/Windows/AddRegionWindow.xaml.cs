@@ -1,36 +1,37 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Alerts.WPF.Controls;
+using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Windows;
 
 public partial class AddRegionWindow : System.Windows.Window
 {
-    private readonly MainContentWindow _mainContentWindow;
-    
     private readonly MyUserControl _userControl;
     
     private readonly string _token;
     
-    private readonly long _id;
+    private readonly User _user;
 
-    public AddRegionWindow(MainContentWindow mainContentWindow, MyUserControl userControl,string token, long id)
+    public AddRegionWindow(MyUserControl userControl, string token, User user)
     {
         InitializeComponent();
-
-        _mainContentWindow = mainContentWindow;
         
         _userControl = userControl;
         
         _token = token;
         
-        _id = id;
+        _user = user;
+
+        LoadAddRegionControl();
     }
     
-    private void Load(object sender, RoutedEventArgs e)
+    private void LoadAddRegionControl()
     {
-        var addRegionControl = new AddRegionControl(this,_mainContentWindow , _userControl, _token, _id);
-        
-        AddRegionWindowStackPanel.Children.Add(addRegionControl);
+        var addRegionControl = new AddRegionControl(this, _userControl, _token, _user);
+
+        Content = addRegionControl;
     }
+    
+    
 }

@@ -2,11 +2,11 @@
 
 public static class AlertsHelper
 {
-    public static readonly Dictionary<int, string> AllLocationsString;
+    public static readonly Dictionary<int, string> AlertsLocation;
 
     static AlertsHelper()
     {
-        AllLocationsString = new Dictionary<int, string>()
+        AlertsLocation = new Dictionary<int, string>()
         {
             { 3, "Хмельницька область" },
             { 4, "Вінницька область" },
@@ -16,7 +16,7 @@ public static class AlertsHelper
             { 10, "Житомирська область" },
             { 11, "Закарпатська область" },
             { 12, "Запорізька область" },
-            { 13, "Івано-Франківськаобласть" },
+            { 13, "Івано-Франківська область" },
             { 14, "Київська область" },
             { 15, "Кіровоградська область" },
             { 16, "Луганська область" },
@@ -39,13 +39,13 @@ public static class AlertsHelper
     }
 
     public static bool IsValidOblastId(int oblastId)
-        => AllLocationsString.ContainsKey(oblastId);
+        => AlertsLocation.ContainsKey(oblastId);
 
     public static bool IsValidLocationTitle(string oblast)
-        => AllLocationsString.ContainsValue(oblast);
+        => AlertsLocation.ContainsValue(oblast);
 
     public static int GetOblastIdByLocationTitle(string oblast)
-        => AllLocationsString
+        => AlertsLocation
             .FirstOrDefault(pair => EqualityComparer<string>.Default.Equals(pair.Value, oblast)).Key;
 
 }

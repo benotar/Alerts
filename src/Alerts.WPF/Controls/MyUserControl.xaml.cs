@@ -22,25 +22,9 @@ public partial class MyUserControl : System.Windows.Controls.UserControl
         DataContext = _user;
     }
 
-    private void FillRegionsComboBox(object sender, RoutedEventArgs e)
+    private void RegionsComboBoxLoadFill(object sender, RoutedEventArgs e)
     {
-        // var comboBox = sender as ComboBox;
-        //
-        // if (comboBox is null)
-        // {
-        //     MessageBox.Show("Не вдалось отримати регіони!");
-        //     
-        //     return;
-        // }
-        //
-        // comboBox.Items.Clear();
-        //
-        // foreach (var region in _user.Regions)
-        // {
-        //     comboBox.Items.Add(region);
-        // }
-
-        Fill();
+        FillRegionsComboBox();
     }
 
 
@@ -54,26 +38,20 @@ public partial class MyUserControl : System.Windows.Controls.UserControl
             
             return;
         }
-        
-        var selectedRegion = comboBox.SelectedItem.ToString();
-        
-        if (string.IsNullOrEmpty(selectedRegion))
-        {
-            MessageBox.Show("Не вдалось отримати регіон");
-            
-            return;
-        }
 
+        var selectedRegion = comboBox.SelectedItem is null ? string.Empty : comboBox.SelectedItem.ToString();
+        
         if (string.IsNullOrEmpty(selectedRegion))
         {
             _mainContentWindow.SelectedRegionLabel.Content = "Порожньо";
         }
+        
         _mainContentWindow.SelectedRegionLabel.Content = RegionsComboBox.SelectedItem;
     }
 
     
     // TODO 
-    public void Fill()
+    public void FillRegionsComboBox()
     {
         RegionsComboBox.Items.Clear();
         
