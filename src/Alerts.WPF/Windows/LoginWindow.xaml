@@ -35,9 +35,9 @@
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
 
-                            <TextBlock VerticalAlignment="Center" Text="Dark mode" />
+                            <TextBlock VerticalAlignment="Center" Text="Темний режим" />
 
-                            <ToggleButton Cursor="Hand" ToolTip="Enable dark mode"
+                            <ToggleButton Cursor="Hand" ToolTip="Увімкнути темний режим"
                                           Margin="12 0 8 0 "
                                           x:Name="ThemeToggle"
                                           IsChecked="{Binding IsDarkTheme}"
@@ -58,26 +58,26 @@
                        Margin="0 60 0 30"
                        Height="130" />
 
-                <TextBlock Text="Welcome Back!"
-                           Margin="0 0 0 5"
+                <TextBlock Text="З поверненням!"
+                           Margin="0 0 0 15"
                            HorizontalAlignment="Center"
                            FontFamily="Consolas"
                            FontWeight="Bold"
                            FontSize="28" />
 
-                <TextBlock Text="Log in to your existing account"
+                <TextBlock Text="Увійдіть до існуючого облікового запису"
                            FontFamily="Consolas"
                            HorizontalAlignment="Center"
                            FontWeight="SemiBold"
                            FontSize="17"
-                           Margin="0 0 0 50" />
+                           Margin="0 0 0 30" />
 
                 <TextBox Margin="0 0 0 20"
                          x:Name="UserNameTxtBox"
                          Width="300"
                          FontSize="18"
                          FontFamily="Consolas"
-                         materialDesign:HintAssist.Hint="Enter username"
+                         materialDesign:HintAssist.Hint="Введіть ім'я користувача"
                          BorderBrush="{DynamicResource MaterialDesignDivider}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
@@ -86,12 +86,12 @@
                              Width="300"
                              FontSize="18"
                              FontFamily="Consolas"
-                             materialDesign:HintAssist.Hint="Enter password"
+                             materialDesign:HintAssist.Hint="Введіть пароль"
                              BorderBrush="{DynamicResource MaterialDesignDivider}"
                              Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" />
                 
                 <Button Margin="0 0 0 20"
-                        Content="LOG IN"
+                        Content="Авторизуватись"
                         FontWeight="SemiBold"
                         FontSize="18"
                         FontFamily="Consolas"
@@ -104,7 +104,7 @@
                         Click="LoginBtnOnClick"/>
                 
                 <Button Margin="0 0 0 20"
-                        Content="Create Account"
+                        Content="Створити обліковий запис"
                         FontWeight="SemiBold"
                         FontSize="18"
                         FontFamily="Consolas"

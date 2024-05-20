@@ -71,7 +71,7 @@
                              Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" />
 
                 <Button Margin="0 0 0 20"
-                        Content="Створити"
+                        Content="Створити обліковий запис"
                         FontWeight="SemiBold"
                         FontSize="18"
                         FontFamily="Consolas"
