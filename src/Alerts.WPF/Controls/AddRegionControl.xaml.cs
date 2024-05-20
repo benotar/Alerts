@@ -47,12 +47,12 @@ public partial class AddRegionControl : UserControl
             return;
         }
 
-        _user.Regions.Add(region);
+        //_user.Regions.Add(region); // TODO
         
         MessageBox.Show($"Регіон \'{region}\' успішно додано!");
 
         _userControl.FillRegionsComboBox();
-
+        
         ReOpenMainWindow();
     }
 
@@ -66,7 +66,7 @@ public partial class AddRegionControl : UserControl
         _httpClient.Dispose();
     }
 
-    private void AddRegionsControlLoaded(object sender, RoutedEventArgs e)
+    private void AddRegionsControlLoad(object sender, RoutedEventArgs e)
     {
         if (sender is not ComboBox comboBox)
         {
@@ -74,23 +74,15 @@ public partial class AddRegionControl : UserControl
             
             return;
         }
-
-        var validRegions = AlertsHelper.AlertsLocation.Values
-            .Where(region =>
-                !_user.Regions.Contains(region));
-
-        foreach (var region in validRegions)
+        
+        foreach (var region in AlertsHelper.GetValidRegions(_user, false))
         {
             comboBox.Items.Add(region);
         }
     }
-    
+
     private void ReOpenMainWindow()
     {
-        var mainContentWindow = new MainContentWindow(_user, _token);
-        
-        _addRegionWindow.Close();
-        
-        mainContentWindow.Show();
+        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _addRegionWindow);
     }
 }

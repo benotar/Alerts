@@ -44,6 +44,11 @@
                                 Content="Добавити регіон"
                                 Click="AddUserRegionPopupBoxBtnOnClick"/>
                         
+                        <Button x:Name="DeleteUserRegionPopupBoxBtn"
+                                ToolTip="Видалити регіон"
+                                Content="Видалити регіон"
+                                Click="DeleteUserRegionPopupBoxBtnOnClick"/>
+                        
                         <Button x:Name="ExitPopupBoxBtn"
                                 ToolTip="Закрити програму"
                                 Content="Вихід"

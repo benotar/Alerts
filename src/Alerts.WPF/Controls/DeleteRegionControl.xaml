@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Alerts.WPF.Controls.AddRegionControl"
+﻿<UserControl x:Class="Alerts.WPF.Controls.DeleteRegionControl"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Alerts.WPF.Controls"
              mc:Ignorable="d" Width="510" Height="230">
-
+    
     <UserControl.Resources>
         <Style TargetType="Label" x:Key="LabelStyle">
             <Style.Setters>
@@ -16,11 +16,11 @@
             </Style.Setters>
         </Style>
     </UserControl.Resources>
-
+    
     <StackPanel  Background="{DynamicResource MaterialDesignPaper}"
                  Unloaded="Unload">
 
-        <Label Content="Вам доступні наступні регіони:"
+        <Label Content="Регіони, які можна видалити:"
                Margin="0 30 0 5"
                HorizontalAlignment="Center"
                Style="{StaticResource LabelStyle}"/>
@@ -36,31 +36,30 @@
                       Foreground="White"
                       FontSize="18"
                       FontFamily="Consolas"
-                      Loaded="AddRegionsControlLoad"
+                      Loaded="DeleteRegionsControlLoad"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="0 0 0 30">
-
+            
             <Button Width="200"
                     Height="35"
                     Content="Додати"
                     FontSize="16"
-                    x:Name="AddRegionBtn"
-                    Click="AddRegionBtnOnClick" />
-
+                    x:Name="DeleteRegionBtn"
+                    Click="DeleteRegionBtnOnClick" />
+            
             <Button Width="200"
                     Height="35"
                     Content="Відміна"
-                    Margin="50 0 0 0"
                     FontSize="16"
-                    x:Name="AddRegionCancelBtn"
+                    Margin="50 0 0 0"
+                    x:Name="DeleteRegionCancelBtn"
                     Click="AddRegionCancelBtnOnClick" />
 
         </StackPanel>
 
     </StackPanel>
-    
 </UserControl>

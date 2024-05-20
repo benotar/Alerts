@@ -87,6 +87,11 @@ public partial class MainContentWindow : Window
         OpenAddRegionWindow();
     }
 
+    private void DeleteUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        OpenDeleteRegionWindow();
+    }
+    
     private void OpenAddRegionWindow()
     {
         var addRegionWindow = new AddRegionWindow(_userControl, _token, _user);
@@ -94,6 +99,15 @@ public partial class MainContentWindow : Window
         this.Close();
         
         addRegionWindow.Show();
+    }
+    
+    private void OpenDeleteRegionWindow()
+    {
+        var deleteRegionWindow = new DeleteRegionWindow(_userControl, _token, _user);
+        
+        this.Close();
+        
+        deleteRegionWindow.Show();
     }
     
     private void AddAlertControl(string location)
@@ -176,4 +190,5 @@ public partial class MainContentWindow : Window
 
         MainPanel.Children.Add(_getAlertForRegionButton);
     }
+    
 }

@@ -1,4 +1,6 @@
-﻿namespace Alerts.WPF.Hepler;
+﻿using Alerts.WPF.Data.Models;
+
+namespace Alerts.WPF.Hepler;
 
 public static class AlertsHelper
 {
@@ -48,4 +50,12 @@ public static class AlertsHelper
         => AlertsLocation
             .FirstOrDefault(pair => EqualityComparer<string>.Default.Equals(pair.Value, oblast)).Key;
 
+    public static IEnumerable<string> GetValidRegions(User user, bool flag)
+        => flag
+            ? AlertsLocation.Values
+                .Where(region =>
+                    user.Regions.Contains(region))
+            : AlertsLocation.Values
+                .Where(region =>
+                    !user.Regions.Contains(region));
 }

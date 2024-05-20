@@ -32,7 +32,6 @@ public class MyHttpClient : IDisposable
         }
     }
     
-    
     public async Task<T?> GetWithTokenAsync<T>(string url, string token)
     {
         EnsureHttpClient();
@@ -80,6 +79,43 @@ public class MyHttpClient : IDisposable
         try
         {
             var response = await _httpClient.PutAsync(url, content);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                MessageBox.Show($"Error :{response.StatusCode}");
+
+                return false;
+            }
+            
+            response.EnsureSuccessStatusCode();
+
+            return true;
+        }
+        catch (HttpRequestException ex)
+        {
+            MessageBox.Show($"HTTP error: {ex.Message}");
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+            
+            return false;
+        }
+    }
+    
+    public async Task<bool> DeleteWithTokenAsync(string url, string token)
+    {
+        EnsureHttpClient();
+
+        var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
+        
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        
+        try
+        {
+            var response = await _httpClient.SendAsync(requestMessage);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
