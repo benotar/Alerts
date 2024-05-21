@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using Alerts.WPF.Controls;
+using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 
@@ -9,9 +10,11 @@ namespace Alerts.WPF.Windows;
 
 public partial class MainContentWindow : Window
 {
-    private User _user { get; set; }
+    private readonly User _user;
     
     private readonly string _token;
+    
+    private readonly ApplicationDataContext _db;
 
     public Label SelectedRegionLabel;
 
@@ -26,13 +29,15 @@ public partial class MainContentWindow : Window
     private AlertsControl _alertsControl;
     
 
-    public MainContentWindow(User user, string token)
+    public MainContentWindow(User user, string token, ApplicationDataContext db)
     {
         InitializeComponent();
 
         _user = user;
 
         _token = token;
+        
+        _db = db;
 
         SelectedRegionLabel = new Label();
 
@@ -82,6 +87,11 @@ public partial class MainContentWindow : Window
         _getAlertForRegionButton.IsEnabled = true;
     }
     
+    private void AllInfoForAirAlertBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        OpenFullAlertWindow();
+    }
+    
     private void AddUserRegionPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {
         OpenAddRegionWindow();
@@ -91,10 +101,19 @@ public partial class MainContentWindow : Window
     {
         OpenDeleteRegionWindow();
     }
+
+    private void OpenFullAlertWindow()
+    {
+        var fullAlertWindow = new FullAlertWindow(this, _token);
+        
+        this.Close();
+
+        fullAlertWindow.Show();
+    }
     
     private void OpenAddRegionWindow()
     {
-        var addRegionWindow = new AddRegionWindow(_userControl, _token, _user);
+        var addRegionWindow = new AddRegionWindow(_userControl, _token, _user, _db);
         
         this.Close();
         
@@ -103,7 +122,7 @@ public partial class MainContentWindow : Window
     
     private void OpenDeleteRegionWindow()
     {
-        var deleteRegionWindow = new DeleteRegionWindow(_userControl, _token, _user);
+        var deleteRegionWindow = new DeleteRegionWindow(_userControl, _token, _user, _db);
         
         this.Close();
         
@@ -190,5 +209,4 @@ public partial class MainContentWindow : Window
 
         MainPanel.Children.Add(_getAlertForRegionButton);
     }
-    
 }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -11,17 +12,21 @@ public partial class DeleteRegionControl : UserControl
 {
     private readonly MyHttpClient _httpClient;
     
+    private readonly ApplicationDataContext _db;
+    
     private readonly DeleteRegionWindow _deleteRegionWindow;
     
     private readonly MyUserControl _userControl;
 
     private readonly string _token;
     
-    private readonly User _user;
+    private User _user;
     
-    public DeleteRegionControl(DeleteRegionWindow deleteRegionWindow, MyUserControl userControl, string token, User user)
+    public DeleteRegionControl(DeleteRegionWindow deleteRegionWindow, MyUserControl userControl, string token, User user, ApplicationDataContext db)
     {
         InitializeComponent();
+
+        _db = db;
 
         _httpClient = new MyHttpClient();
 
@@ -49,6 +54,8 @@ public partial class DeleteRegionControl : UserControl
         }
 
         //_user.Regions.(region); // TODO розібратись з бд тут і в додаванні 
+        
+        _user = UserHelper.GetActualUserData(_db, _user.Id); // TODO протестувати
         
         MessageBox.Show($"Регіон \'{region}\' успішно видалено!");
 
@@ -84,6 +91,6 @@ public partial class DeleteRegionControl : UserControl
     
     private void ReOpenMainWindow()
     {
-        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _deleteRegionWindow);
+        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _deleteRegionWindow, _db);
     }
 }

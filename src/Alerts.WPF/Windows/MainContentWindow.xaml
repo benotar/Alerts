@@ -39,6 +39,11 @@
                                          PlacementMode="BottomAndAlignRightEdges">
                     <StackPanel>
                         
+                        <Button x:Name="AllInfoForAirAlertBtn"
+                                ToolTip="Вся інформація про тривогу"
+                                Content="Більше інформації"
+                                Click="AllInfoForAirAlertBtnOnClick"/>
+                        
                         <Button x:Name="AddUserRegionPopupBoxBtn"
                                 ToolTip="Добавити регіон"
                                 Content="Добавити регіон"

@@ -14,8 +14,7 @@ namespace Alerts.WPF.Windows;
 public partial class LoginWindow : Window
 {
     private readonly ApplicationDataContext _db;
-    private bool IsDarkTheme { get; set; }
-
+    
     private readonly PaletteHelper _paletteHelper;
 
     private MyHttpClient _httpClient;
@@ -66,7 +65,7 @@ public partial class LoginWindow : Window
 
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
 
-        MainContentWindow mainContentWindow = new(user!, token);
+        MainContentWindow mainContentWindow = new(user!, token, _db);
 
         this.Close();
         

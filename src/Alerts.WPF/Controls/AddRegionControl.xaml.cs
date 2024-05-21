@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -14,24 +15,29 @@ public partial class AddRegionControl : UserControl
     private readonly MyUserControl _userControl;
 
     private readonly AddRegionWindow _addRegionWindow;
-    
+
     private readonly string _token;
-    
-    private readonly User _user;
-    
-    public AddRegionControl(AddRegionWindow addRegionWindow, MyUserControl userControl,string token, User user)
+
+    private  User _user;
+
+    private readonly ApplicationDataContext _db;
+
+    public AddRegionControl(AddRegionWindow addRegionWindow, MyUserControl userControl, string token, User user,
+        ApplicationDataContext db)
     {
         InitializeComponent();
 
         _httpClient = new MyHttpClient();
-        
+
         _userControl = userControl;
 
         _addRegionWindow = addRegionWindow;
-        
+
         _token = token;
 
         _user = user;
+
+        _db = db;
     }
 
     private async void AddRegionBtnOnClick(object sender, RoutedEventArgs e)
@@ -48,11 +54,13 @@ public partial class AddRegionControl : UserControl
         }
 
         //_user.Regions.Add(region); // TODO
-        
+
+        _user = UserHelper.GetActualUserData(_db, _user.Id); // TODO протестувати
+
         MessageBox.Show($"Регіон \'{region}\' успішно додано!");
 
         _userControl.FillRegionsComboBox();
-        
+
         ReOpenMainWindow();
     }
 
@@ -71,10 +79,10 @@ public partial class AddRegionControl : UserControl
         if (sender is not ComboBox comboBox)
         {
             MessageBox.Show("Не вдалось отримати список доступних регіонів!");
-            
+
             return;
         }
-        
+
         foreach (var region in AlertsHelper.GetValidRegions(_user, false))
         {
             comboBox.Items.Add(region);
@@ -83,6 +91,6 @@ public partial class AddRegionControl : UserControl
 
     private void ReOpenMainWindow()
     {
-        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _addRegionWindow);
+        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _addRegionWindow, _db);
     }
 }

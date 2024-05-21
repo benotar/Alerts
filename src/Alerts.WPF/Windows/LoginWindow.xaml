@@ -32,8 +32,8 @@
                     <StackPanel>
                         
                         <Button x:Name="ExitPopupBoxBtn"
-                                ToolTip="Close application"
-                                Content="Exit"
+                                ToolTip="Вийти з додатку"
+                                Content="Вихід"
                                 Click="ExitPopupBoxBtnOnClick" />
 
                     </StackPanel>
