@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Alerts.WPF.Data.Models;
+using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
 using static System.String;
 
@@ -49,9 +50,9 @@ public partial class RegisterWindow : Window
             return;
         }
         
-        MessageBox.Show($"Користувач {newUser.UserName} успішно створений!");
+        MessageBox.Show($"Користувач \'{newUser.UserName}\' успішно створений!");
 
-        Close();
+        ReOpenLoginWindow();
     }
     
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -63,11 +64,11 @@ public partial class RegisterWindow : Window
 
     private void CreateAccountExitBtnOnClick(object sender, RoutedEventArgs e)
     {
-        var loginWindow = new LoginWindow();
-        
-        this.Close();
-        
-        loginWindow.Show();
+        ReOpenLoginWindow();
     }
-    
+
+    private void ReOpenLoginWindow()
+    {
+        ReopenWindowHelper.ReOpenLoginWindow(this);
+    }
 }

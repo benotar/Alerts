@@ -13,8 +13,6 @@ public partial class MainContentWindow : Window
     private readonly User _user;
     
     private readonly string _token;
-    
-    private readonly ApplicationDataContext _db;
 
     public Label SelectedRegionLabel;
 
@@ -29,7 +27,7 @@ public partial class MainContentWindow : Window
     private AlertsControl _alertsControl;
     
 
-    public MainContentWindow(User user, string token, ApplicationDataContext db)
+    public MainContentWindow(User user, string token)
     {
         InitializeComponent();
 
@@ -37,14 +35,12 @@ public partial class MainContentWindow : Window
 
         _token = token;
         
-        _db = db;
-
         SelectedRegionLabel = new Label();
 
         _regionLabel = new Label();
         
         _selectedRegionStackPanel = new StackPanel();
-        
+
         _userControl = new MyUserControl(this, _user);
 
         _getAlertForRegionButton = new Button();
@@ -113,7 +109,7 @@ public partial class MainContentWindow : Window
     
     private void OpenAddRegionWindow()
     {
-        var addRegionWindow = new AddRegionWindow(_userControl, _token, _user, _db);
+        var addRegionWindow = new AddRegionWindow(_userControl, _token, _user);
         
         this.Close();
         
@@ -122,7 +118,7 @@ public partial class MainContentWindow : Window
     
     private void OpenDeleteRegionWindow()
     {
-        var deleteRegionWindow = new DeleteRegionWindow(_userControl, _token, _user, _db);
+        var deleteRegionWindow = new DeleteRegionWindow(_userControl, _token, _user);
         
         this.Close();
         

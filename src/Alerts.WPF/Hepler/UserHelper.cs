@@ -1,12 +1,19 @@
 ﻿using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alerts.WPF.Hepler;
 
 public static class UserHelper
 {
-    public static User GetActualUserData(ApplicationDataContext db, long userId)
+    public static async Task<User?> GetActualUserData(string userName)
     {
-        return db.Users.Where(u => u.Id == userId).FirstOrDefault();
+        await using var db = new ApplicationDataContext();
+        
+        var actualUser = await db.Users
+            .Where(u => u.UserName == userName)
+            .FirstOrDefaultAsync();
+            
+        return actualUser;
     }
 }

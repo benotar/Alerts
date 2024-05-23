@@ -65,7 +65,7 @@ public partial class LoginWindow : Window
 
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
 
-        MainContentWindow mainContentWindow = new(user!, token, _db);
+        MainContentWindow mainContentWindow = new(user!, token);
 
         this.Close();
         

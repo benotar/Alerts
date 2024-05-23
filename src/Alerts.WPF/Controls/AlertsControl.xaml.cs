@@ -52,7 +52,7 @@ public partial class AlertsControl : UserControl
         switch (content)
         {
             case "N":
-                IsActiveAlertLabel.Content = "Немає немає інформації про повітряну тривогу";
+                IsActiveAlertLabel.Content = "Немає інформації про повітряну тривогу";
                 return;
             case "P":
                 IsActiveAlertLabel.Content = "Часткова тривога в районах чи громадах";

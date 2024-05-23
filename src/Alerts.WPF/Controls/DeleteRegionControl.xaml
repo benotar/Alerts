@@ -46,7 +46,7 @@
             
             <Button Width="200"
                     Height="35"
-                    Content="Додати"
+                    Content="Видалити"
                     FontSize="16"
                     x:Name="DeleteRegionBtn"
                     Click="DeleteRegionBtnOnClick" />

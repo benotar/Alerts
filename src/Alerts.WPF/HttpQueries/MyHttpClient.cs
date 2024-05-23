@@ -110,12 +110,12 @@ public class MyHttpClient : IDisposable
         EnsureHttpClient();
 
         var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
-        
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         
         try
         {
-            var response = await _httpClient.SendAsync(requestMessage);
+            var response = await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {

@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -12,8 +11,6 @@ public partial class DeleteRegionControl : UserControl
 {
     private readonly MyHttpClient _httpClient;
     
-    private readonly ApplicationDataContext _db;
-    
     private readonly DeleteRegionWindow _deleteRegionWindow;
     
     private readonly MyUserControl _userControl;
@@ -22,11 +19,9 @@ public partial class DeleteRegionControl : UserControl
     
     private User _user;
     
-    public DeleteRegionControl(DeleteRegionWindow deleteRegionWindow, MyUserControl userControl, string token, User user, ApplicationDataContext db)
+    public DeleteRegionControl(DeleteRegionWindow deleteRegionWindow, MyUserControl userControl, string token, User user)
     {
         InitializeComponent();
-
-        _db = db;
 
         _httpClient = new MyHttpClient();
 
@@ -38,7 +33,6 @@ public partial class DeleteRegionControl : UserControl
 
         _user = user;
     }
-
     
     private async void DeleteRegionBtnOnClick(object sender, RoutedEventArgs e)
     {
@@ -52,10 +46,6 @@ public partial class DeleteRegionControl : UserControl
         {
             return;
         }
-
-        //_user.Regions.(region); // TODO розібратись з бд тут і в додаванні 
-        
-        _user = UserHelper.GetActualUserData(_db, _user.Id); // TODO протестувати
         
         MessageBox.Show($"Регіон \'{region}\' успішно видалено!");
 
@@ -64,7 +54,7 @@ public partial class DeleteRegionControl : UserControl
         ReOpenMainWindow();
     }
     
-    private void DeleteRegionsControlLoad(object sender, RoutedEventArgs e)
+    private async void DeleteRegionsControlLoad(object sender, RoutedEventArgs e)
     {
         if (sender is not ComboBox comboBox)
         {
@@ -72,6 +62,17 @@ public partial class DeleteRegionControl : UserControl
             
             return;
         }
+        
+        var actualUser = await UserHelper.GetActualUserData(_user.UserName);
+
+        if (actualUser is null)
+        {
+            MessageBox.Show("Не вдалось отримати користувача!");
+
+            return;
+        }
+
+        _user = actualUser;
         
         foreach (var region in AlertsHelper.GetValidRegions(_user, true))
         {
@@ -91,6 +92,6 @@ public partial class DeleteRegionControl : UserControl
     
     private void ReOpenMainWindow()
     {
-        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _deleteRegionWindow, _db);
+        ReopenWindowHelper.ReOpenMainWindow(_user, _token, _deleteRegionWindow);
     }
 }

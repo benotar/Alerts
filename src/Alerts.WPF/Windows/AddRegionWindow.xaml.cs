@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Alerts.WPF.Controls;
-using Alerts.WPF.Data;
+﻿using Alerts.WPF.Controls;
 using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Windows;
@@ -14,9 +11,7 @@ public partial class AddRegionWindow : System.Windows.Window
     
     private readonly User _user;
     
-    private readonly ApplicationDataContext _db;
-
-    public AddRegionWindow(MyUserControl userControl, string token, User user, ApplicationDataContext db)
+    public AddRegionWindow(MyUserControl userControl, string token, User user)
     {
         InitializeComponent();
         
@@ -26,17 +21,13 @@ public partial class AddRegionWindow : System.Windows.Window
         
         _user = user;
         
-        _db = db;
-
         LoadAddRegionControl();
     }
     
     private void LoadAddRegionControl()
     {
-        var addRegionControl = new AddRegionControl(this, _userControl, _token, _user, _db);
+        var addRegionControl = new AddRegionControl(this, _userControl, _token, _user);
 
         Content = addRegionControl;
     }
-    
-    
 }
