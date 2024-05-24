@@ -1,4 +1,5 @@
-﻿using Alerts.WPF.Data.Models;
+﻿using Alerts.WPF.AlertsModels;
+using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Hepler;
 
@@ -58,4 +59,22 @@ public static class AlertsHelper
             : AlertsLocation.Values
                 .Where(region =>
                     !user.Regions.Contains(region));
+
+    public static List<BindingAlerts> ConvertForBiding(AlertsModels.Alerts[] alerts)
+    {
+        List<BindingAlerts> bindingAlerts = new();
+        
+        foreach (var alert in alerts)
+        {
+            var bindingAlert = new BindingAlerts
+            {
+                LocationTitle = alert.LocationTitle
+            };
+
+            bindingAlerts.Add(bindingAlert);
+            
+        }
+
+        return bindingAlerts;
+    }
 }

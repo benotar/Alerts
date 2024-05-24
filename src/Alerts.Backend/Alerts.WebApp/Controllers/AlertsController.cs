@@ -23,10 +23,9 @@ public class AlertsController : Controller
     [HttpGet("GetActiveAlerts")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetActiveAlerts()
     {
-        string url = _alertsService.GetActiveAlertsUrl();
+        var url = _alertsService.GetActiveAlertsUrl();
 
         if (IsNullOrEmpty(url))
         {
@@ -39,9 +38,9 @@ public class AlertsController : Controller
 
         if (result is null)
         {
-            return NotFound();
+            return BadRequest();
         }
-
+        
         return Ok(result);
     }
 

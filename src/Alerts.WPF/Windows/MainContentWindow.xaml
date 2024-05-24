@@ -46,7 +46,7 @@
                         
                         <Button x:Name="AddUserRegionPopupBoxBtn"
                                 ToolTip="Добавити регіон"
-                                Content="Добавити регіон"
+                                Content="Додати регіон"
                                 Click="AddUserRegionPopupBoxBtnOnClick"/>
                         
                         <Button x:Name="DeleteUserRegionPopupBoxBtn"

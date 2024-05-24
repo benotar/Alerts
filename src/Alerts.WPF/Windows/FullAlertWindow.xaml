@@ -5,8 +5,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
-        Title="FullAlertWindow" Height="450" Width="800">
-    <Grid>
+        Title="FullAlertWindow" Height="480" Width="700"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Margin" Value="0 10 0 10"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
         
-    </Grid>
+        <Style x:Key="ListBoxStyle" TargetType="ListBox">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Margin" Value="10 0 10 0"/>
+                <Setter Property="Height" Value="380"/>
+                <Setter Property="Width" Value="600"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    
+    <StackPanel Unloaded="Unload">
+        
+        <Label Style="{StaticResource LabelStyle}"
+               Content="Тривога активна в:"
+               Foreground="Black"/>
+        
+        <ListBox ItemsSource="{Binding BindingAlerts}"
+                 Foreground="Black"
+                 Style="{StaticResource ListBoxStyle}">
+                
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding LocationTitle, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+                
+        </ListBox>
+        
+    </StackPanel>
+    
 </Window>

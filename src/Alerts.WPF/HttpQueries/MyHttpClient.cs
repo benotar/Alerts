@@ -66,8 +66,33 @@ public class MyHttpClient : IDisposable
             return default;
         }
     }
+    
+    public async Task<T?> GetAsync<T>(string url)
+    {
+        EnsureHttpClient();
+        
+        try
+        {
+            var response = await _httpClient.GetAsync(url);
+            
+            response.EnsureSuccessStatusCode();
 
+            return await response.Content.ReadFromJsonAsync<T>();
+        }
+        catch (HttpRequestException ex)
+        {
+            MessageBox.Show($"HTTP error: {ex.Message}");
 
+            return default;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+
+            return default;
+        }
+    }
+    
     public async Task<bool> PutWithTokenAsync(string url, string token)
     {
         EnsureHttpClient();

@@ -100,7 +100,7 @@ public partial class MainContentWindow : Window
 
     private void OpenFullAlertWindow()
     {
-        var fullAlertWindow = new FullAlertWindow(this, _token);
+        var fullAlertWindow = new FullAlertWindow(_token, _user);
         
         this.Close();
 
