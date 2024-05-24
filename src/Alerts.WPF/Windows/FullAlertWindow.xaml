@@ -1,11 +1,12 @@
 ﻿<Window x:Class="Alerts.WPF.Windows.FullAlertWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
-        Title="FullAlertWindow" Height="480" Width="700"
+        Title="FullAlertWindow" Height="580" Width="700"
         WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
@@ -24,18 +25,18 @@
                 <Setter Property="FontFamily" Value="Consolas" />
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Margin" Value="10 0 10 0"/>
+                <Setter Property="Margin" Value="10 0 10 40"/>
                 <Setter Property="Height" Value="380"/>
                 <Setter Property="Width" Value="600"/>
             </Style.Setters>
         </Style>
     </Window.Resources>
     
-    <StackPanel Unloaded="Unload">
+    <StackPanel Unloaded="Unload"
+                Background="{DynamicResource MaterialDesignPaper}">
         
         <Label Style="{StaticResource LabelStyle}"
-               Content="Тривога активна в:"
-               Foreground="Black"/>
+               Content="Назва локації, де активна повітряна тривога"/>
         
         <ListBox ItemsSource="{Binding BindingAlerts}"
                  Foreground="Black"
@@ -48,6 +49,27 @@
             </ListBox.ItemTemplate>
                 
         </ListBox>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0 0 0 30">
+            
+            <Button Width="280"
+                    Height="35"
+                    Content="Отримати повну інформацію"
+                    FontSize="16"
+                    x:Name="FullInfoBtn"
+                    Click="FullInfoBtnOnClick" />
+            
+            <Button Width="200"
+                    Height="35"
+                    Content="Відміна"
+                    FontSize="16"
+                    Margin="50 0 0 0"
+                    x:Name="FullInfoCancelBtn"
+                    Click="FullInfoCancelBtnOnClick" />
+
+        </StackPanel>
         
     </StackPanel>
     

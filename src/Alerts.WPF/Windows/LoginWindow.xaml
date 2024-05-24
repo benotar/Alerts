@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         xmlns:models="clr-namespace:Alerts.WPF.Data.Models"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="760" Width="450"
+        Title="LoginWindow" Height="820" Width="450"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
@@ -101,6 +101,19 @@
                         Width="300"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Click="CreateAccountBtnOnClick"/>
+                
+                <Button Margin="0 0 0 20"
+                        Content="Режим гостя"
+                        FontWeight="SemiBold"
+                        FontSize="18"
+                        FontFamily="Consolas"
+                        x:Name="GuestModeBtn"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" 
+                        Height="53"
+                        Width="300"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Click="GuestModeBtnOnClick"/>
                 
             </StackPanel>
 

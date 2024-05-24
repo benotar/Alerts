@@ -8,6 +8,8 @@ namespace Alerts.WPF.Windows;
 
 public partial class FullAlertWindow : Window
 {
+    private readonly Window _windowFlag;
+    
     private readonly string _token;
     
     private readonly User _user;
@@ -18,10 +20,12 @@ public partial class FullAlertWindow : Window
 
     public List<BindingAlerts> BindingAlerts { get; set; }
     
-    public FullAlertWindow( string token, User user)
+    public FullAlertWindow( string token, User user, Window windowFlag)
     {
         InitializeComponent();
 
+        _windowFlag = windowFlag;
+        
         _httpClient = new MyHttpClient();
         
         _token = token;
@@ -43,6 +47,22 @@ public partial class FullAlertWindow : Window
         _httpClient.Dispose();
     }
     
+    private void FullInfoBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void FullInfoCancelBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        switch (_windowFlag)
+        {
+            case MainContentWindow : ReOpenMainWindow();
+                break;
+            case LoginWindow : ReOpenLoginWindow();
+                break;
+        }
+    }
+    
     private async Task SetAlertsAsync()
     {
         const string apiUrl = "https://localhost:44305/alertsApi/GetActiveAlerts";
@@ -51,10 +71,10 @@ public partial class FullAlertWindow : Window
 
         _alerts = rootAlerts.Alerts;
     }
-
+    
     private void SetDataForBinding()
     {
-        BindingAlerts = AlertsHelper.ConvertForBiding(_alerts);
+        BindingAlerts = AlertsHelper.GetBidingAlerts(_alerts);
 
         if (BindingAlerts is null)
         {
@@ -69,5 +89,10 @@ public partial class FullAlertWindow : Window
     private void ReOpenMainWindow()
     {
         ReopenWindowHelper.ReOpenMainWindow(_user, _token, this);
+    }
+
+    private void ReOpenLoginWindow()
+    {
+        ReopenWindowHelper.ReOpenLoginWindow(this);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Alerts.WPF.AlertsModels;
+using Alerts.WPF.AlertsModels.Enums;
 using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Hepler;
@@ -60,21 +61,56 @@ public static class AlertsHelper
                 .Where(region =>
                     !user.Regions.Contains(region));
 
-    public static List<BindingAlerts> ConvertForBiding(AlertsModels.Alerts[] alerts)
+    public static List<BindingAlerts> GetBidingAlerts(AlertsModels.Alerts[] alerts)
     {
         List<BindingAlerts> bindingAlerts = new();
+
+        int alertId = 1;
         
         foreach (var alert in alerts)
         {
             var bindingAlert = new BindingAlerts
             {
-                LocationTitle = alert.LocationTitle
+                MyAlertId = alertId,
+                LocationTitle = alert.LocationTitle,
+                LocationType = AlertsHelper.GetLocationTypeString(alert.LocationType),
+                StartedAt = alert.StartedAt,
+                UpdatedAt = alert.UpdatedAt,
+                AlertType = AlertsHelper.GetAlertTypeString(alert.AlertType),
+                LocationOblast = alert.LocationOblast,
+                //LocationRaion = alert.LocationRaion is not null ? alert.LocationTitle : "Порожньо" 
+                LocationRaion = alert.LocationRaion??= "Порожньо"
             };
 
             bindingAlerts.Add(bindingAlert);
-            
+
+            ++alertId;
         }
 
         return bindingAlerts;
+    }
+
+    public static string GetLocationTypeString(LocationType locationType)
+    {
+        return locationType switch
+        {
+            LocationType.Oblast => "Область",
+            LocationType.Raion =>"Район",
+            LocationType.City => "Місто",
+            LocationType.Hromada => "Громада",
+            _ => "Невідомо"
+        };
+    }
+    
+    public static string GetAlertTypeString(AlertType alertType)
+    {
+        return alertType switch
+        {
+            AlertType.AirRaid => "Повітряна тривога",
+            AlertType.ArtilleryShelling => "Загроза артобстрілу",
+            AlertType.UrbanFights => "Вуличні бої",
+            AlertType.Chemical => "Хімічна небезпека",
+            _ => "Ядерна небезпека"
+        };
     }
 }

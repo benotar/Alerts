@@ -93,10 +93,23 @@ public partial class LoginWindow : Window
 
         DragMove();
     }
-
-
+    
     private void Unload(object sender, RoutedEventArgs e)
     {
         _httpClient.Dispose();
+    }
+
+    private void GuestModeBtnOnClick(object sender, RoutedEventArgs e)
+    {
+        OpenFullAlertWindow();
+    }
+    
+    private void OpenFullAlertWindow()
+    {
+        var fullAlertWindow = new FullAlertWindow(null, null, this);
+        
+        this.Close();
+
+        fullAlertWindow.Show();
     }
 }
