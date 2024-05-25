@@ -8,29 +8,28 @@ namespace Alerts.WPF.Windows;
 
 public partial class FullAlertWindow : Window
 {
-    private readonly Window _windowFlag;
+    public Window WindowFlag { get; set; }
     
-    private readonly string _token;
+    public string Token { get; set; }
     
-    private readonly User _user;
+    public User User { get; set; }
 
     private AlertsModels.Alerts?[] _alerts;
 
     private readonly MyHttpClient _httpClient;
-
     public List<BindingAlerts> BindingAlerts { get; set; }
     
     public FullAlertWindow( string token, User user, Window windowFlag)
     {
         InitializeComponent();
 
-        _windowFlag = windowFlag;
+        WindowFlag = windowFlag;
         
         _httpClient = new MyHttpClient();
         
-        _token = token;
+        Token = token;
         
-        _user = user;
+        User = user;
 
         InitializeDataAsync();
     }
@@ -49,12 +48,23 @@ public partial class FullAlertWindow : Window
     
     private void FullInfoBtnOnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        if (ActiveAlertsListBox.SelectedItem is not BindingAlerts selectedLocation)
+        {
+            MessageBox.Show("Не вдалось отримати вибрану локацію!");
+            
+            return;
+        }
+
+        var fullAlertSecondWindow = new FullAlertSecondWindow(selectedLocation, this);
+        
+        fullAlertSecondWindow.Show();
+        
+        this.Close();
     }
 
     private void FullInfoCancelBtnOnClick(object sender, RoutedEventArgs e)
     {
-        switch (_windowFlag)
+        switch (WindowFlag)
         {
             case MainContentWindow : ReOpenMainWindow();
                 break;
@@ -88,7 +98,7 @@ public partial class FullAlertWindow : Window
     
     private void ReOpenMainWindow()
     {
-        ReopenWindowHelper.ReOpenMainWindow(_user, _token, this);
+        ReopenWindowHelper.ReOpenMainWindow(User, Token, this);
     }
 
     private void ReOpenLoginWindow()

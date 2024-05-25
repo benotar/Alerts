@@ -1,0 +1,107 @@
+﻿<Window x:Class="Alerts.WPF.Windows.FullAlertSecondWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Alerts.WPF.Windows"
+        mc:Ignorable="d"
+        Title="FullAlertSecondWindow" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Margin" Value="0 10 0 10"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    
+    <StackPanel Background="{DynamicResource MaterialDesignPaper}"
+                Orientation="Vertical"
+                Loaded="FullAlertSecondWindowLoad">
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="15 10 0 5">
+            <Label Content="Область - "
+                   Style="{StaticResource LabelStyle}"/>
+            
+            <Label Content="{Binding LocationOblast}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 5">
+            <Label Content="Район - "
+                   Style="{StaticResource LabelStyle}"/>
+            
+            <Label Content="{Binding LocationRaion}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 5">
+            <Label Content="Тип локації - "
+                   Style="{StaticResource LabelStyle}"/>
+            
+            <Label Content="{Binding LocationType}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackPanel>
+        
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 5">
+            <Label Content="Локація - "
+                   Style="{StaticResource LabelStyle}"/>
+            
+            <Label Content="{Binding LocationTitle}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 5">
+            <Label Content="Тип тривоги - "
+                   Style="{StaticResource LabelStyle}"/>
+            
+            <Label Content="{Binding AlertType}"
+                   Style="{StaticResource LabelStyle}"/>
+        </StackPanel>
+           
+           <StackPanel Orientation="Horizontal"
+                       HorizontalAlignment="Left"
+                       Margin="15 0 0 5">
+                  <Label Content="Дата початку тривоги - "
+                         Style="{StaticResource LabelStyle}"/>
+            
+                  <Label Content="{Binding StartedAt}"
+                         Style="{StaticResource LabelStyle}"/>
+           </StackPanel>
+           
+           <StackPanel Orientation="Horizontal"
+                       HorizontalAlignment="Left"
+                       Margin="15 0 0 15">
+                  <Label Content="Останнє оновлення - "
+                         Style="{StaticResource LabelStyle}"/>
+            
+                  <Label Content="{Binding UpdatedAt}"
+                         Style="{StaticResource LabelStyle}"/>
+           </StackPanel>
+           
+           <Button Width="200"
+                   Height="35"
+                   Content="Назад"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   x:Name="FullInfoBackBtn"
+                   Click="FullInfoBackBtnOnClick" />
+        
+    </StackPanel>
+</Window>

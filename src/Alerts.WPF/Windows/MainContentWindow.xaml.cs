@@ -47,7 +47,7 @@ public partial class MainContentWindow : Window
         
     }
 
-    private void Load(object sender, RoutedEventArgs e)
+    private async void Load(object sender, RoutedEventArgs e)
     {
         HelloUserLabel.Content += _user.UserName;
         
@@ -57,6 +57,11 @@ public partial class MainContentWindow : Window
         
         AddGetAlertForRegionButton();
         
+        AllInfoForAirAlertBtn.IsEnabled = false;
+
+        await Task.Delay(5000);
+
+        AllInfoForAirAlertBtn.IsEnabled = true;
     }
     private void MainExitPopupBoxBtnOnClick(object sender, RoutedEventArgs e)
     {

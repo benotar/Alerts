@@ -40,7 +40,8 @@
         
         <ListBox ItemsSource="{Binding BindingAlerts}"
                  Foreground="Black"
-                 Style="{StaticResource ListBoxStyle}">
+                 Style="{StaticResource ListBoxStyle}"
+                 x:Name="ActiveAlertsListBox">
                 
             <ListBox.ItemTemplate>
                 <DataTemplate>

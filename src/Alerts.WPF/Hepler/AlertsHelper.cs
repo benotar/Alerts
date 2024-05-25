@@ -73,12 +73,11 @@ public static class AlertsHelper
             {
                 MyAlertId = alertId,
                 LocationTitle = alert.LocationTitle,
-                LocationType = AlertsHelper.GetLocationTypeString(alert.LocationType),
+                LocationType = GetLocationTypeString(alert.LocationType),
                 StartedAt = alert.StartedAt,
                 UpdatedAt = alert.UpdatedAt,
-                AlertType = AlertsHelper.GetAlertTypeString(alert.AlertType),
+                AlertType = GetAlertTypeString(alert.AlertType),
                 LocationOblast = alert.LocationOblast,
-                //LocationRaion = alert.LocationRaion is not null ? alert.LocationTitle : "Порожньо" 
                 LocationRaion = alert.LocationRaion??= "Порожньо"
             };
 
@@ -90,7 +89,7 @@ public static class AlertsHelper
         return bindingAlerts;
     }
 
-    public static string GetLocationTypeString(LocationType locationType)
+    private static string GetLocationTypeString(LocationType locationType)
     {
         return locationType switch
         {
@@ -102,7 +101,7 @@ public static class AlertsHelper
         };
     }
     
-    public static string GetAlertTypeString(AlertType alertType)
+    private static string GetAlertTypeString(AlertType alertType)
     {
         return alertType switch
         {

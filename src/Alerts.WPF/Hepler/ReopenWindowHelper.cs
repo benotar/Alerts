@@ -23,4 +23,13 @@ public static class ReopenWindowHelper
         
         loginContentWindow.Show();
     }
+
+    public static void ReOpenFullAlertWindow(FullAlertWindow fullAlertWindow, Window windowClose)
+    {
+        var newFullAlertWindow = new FullAlertWindow(fullAlertWindow.Token, fullAlertWindow.User, fullAlertWindow.WindowFlag);
+        
+        windowClose.Close();
+        
+        newFullAlertWindow.Show();
+    }
 }
