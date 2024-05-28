@@ -79,7 +79,7 @@ public class AuthController : Controller
         return Ok(returnUser);
     }
 
-    [HttpPost("login")]
+    [HttpPost("Login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Login([FromBody] AuthorizationModel authModel)
