@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Alerts.WPF.Data;
+using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
 using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ public partial class LoginWindow : Window
     
     private readonly PaletteHelper _paletteHelper;
 
-    private MyHttpClient _httpClient;
+    private readonly MyHttpClient _httpClient;
 
     public LoginWindow()
     {
@@ -54,9 +55,9 @@ public partial class LoginWindow : Window
             return;
         }
 
-        const string apiUrl = "https://localhost:44305/auth/login";
-
-        var token = await _httpClient.PostAsync<string>(apiUrl, new { UserName = userName, Password = userPassword });
+        //const string apiUrl = "https://localhost:44305/auth/Login";
+        
+        var token = await _httpClient.PostAsync<string>(ApiUrls.GetLoginUrl(), new { UserName = userName, Password = userPassword });
 
         if (token is null)
         {

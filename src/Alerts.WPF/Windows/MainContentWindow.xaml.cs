@@ -149,7 +149,7 @@ public partial class MainContentWindow : Window
             return;
         }
 
-        existingControl._oblastId = oblastId;
+        existingControl.OblastId = oblastId;
         
         existingControl.GetActualData();
     }

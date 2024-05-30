@@ -30,9 +30,7 @@ public partial class MyUserControl : System.Windows.Controls.UserControl
     
     private void RegionsComboBoxItemSelected(object sender, SelectionChangedEventArgs e)
     {
-        var comboBox = sender as ComboBox;
-
-        if (comboBox is null)
+        if (sender is not ComboBox comboBox)
         {
             MessageBox.Show("Не вдалось отримати комбо бокс");
 

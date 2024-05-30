@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -39,9 +38,9 @@ public partial class AddRegionControl : UserControl
     {
         var region = RegionTextBox.Text;
 
-        var apiUrl = $"https://localhost:44305/userApi/AddRegion/{_user.Id}/{region}";
+        //var apiUrl = $"https://localhost:44305/userApi/AddRegion/{_user.Id}/{region}";
 
-        var result = await _httpClient.PutWithTokenAsync(apiUrl, _token);
+        var result = await _httpClient.PutWithTokenAsync(ApiUrls.GetAddRegionUrl(_user.Id, region), _token);
 
         if (!result)
         {

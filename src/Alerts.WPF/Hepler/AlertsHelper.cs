@@ -6,11 +6,11 @@ namespace Alerts.WPF.Hepler;
 
 public static class AlertsHelper
 {
-    public static readonly Dictionary<int, string> AlertsLocation;
+    private static readonly Dictionary<int, string> _alertsLocation;
 
     static AlertsHelper()
     {
-        AlertsLocation = new Dictionary<int, string>()
+        _alertsLocation = new Dictionary<int, string>()
         {
             { 3, "Хмельницька область" },
             { 4, "Вінницька область" },
@@ -43,21 +43,21 @@ public static class AlertsHelper
     }
 
     public static bool IsValidOblastId(int oblastId)
-        => AlertsLocation.ContainsKey(oblastId);
+        => _alertsLocation.ContainsKey(oblastId);
 
     public static bool IsValidLocationTitle(string oblast)
-        => AlertsLocation.ContainsValue(oblast);
+        => _alertsLocation.ContainsValue(oblast);
 
     public static int GetOblastIdByLocationTitle(string oblast)
-        => AlertsLocation
+        => _alertsLocation
             .FirstOrDefault(pair => EqualityComparer<string>.Default.Equals(pair.Value, oblast)).Key;
 
     public static IEnumerable<string> GetValidRegions(User user, bool flag)
         => flag
-            ? AlertsLocation.Values
+            ? _alertsLocation.Values
                 .Where(region =>
                     user.Regions.Contains(region))
-            : AlertsLocation.Values
+            : _alertsLocation.Values
                 .Where(region =>
                     !user.Regions.Contains(region));
 
@@ -78,7 +78,7 @@ public static class AlertsHelper
                 UpdatedAt = alert.UpdatedAt,
                 AlertType = GetAlertTypeString(alert.AlertType),
                 LocationOblast = alert.LocationOblast,
-                LocationRaion = alert.LocationRaion??= "Порожньо"
+                LocationRaion = alert.LocationRaion??= "Відсутня інформація"
             };
 
             bindingAlerts.Add(bindingAlert);

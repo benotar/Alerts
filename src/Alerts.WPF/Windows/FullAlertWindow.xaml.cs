@@ -75,9 +75,9 @@ public partial class FullAlertWindow : Window
     
     private async Task SetAlertsAsync()
     {
-        const string apiUrl = "https://localhost:44305/alertsApi/GetActiveAlerts";
+        //const string apiUrl = "https://localhost:44305/alertsApi/GetActiveAlerts";
 
-        var rootAlerts = await _httpClient.GetAsync<RootObject>(apiUrl);
+        var rootAlerts = await _httpClient.GetAsync<RootObject>(ApiUrls.GetActiveAlertsUrl());
 
         _alerts = rootAlerts.Alerts;
     }

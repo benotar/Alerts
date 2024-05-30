@@ -10,11 +10,11 @@ namespace Alerts.WPF.Controls;
 
 public partial class AlertsControl : UserControl
 {
-    public int _oblastId { get; set; }
+    public int OblastId { get; set; }
 
     private readonly string _token;
 
-    private MyHttpClient _httpClient;
+    private readonly MyHttpClient _httpClient;
 
     public AlertsControl(int oblastId, string token)
     {
@@ -22,7 +22,7 @@ public partial class AlertsControl : UserControl
 
         _httpClient = new MyHttpClient();
         
-        _oblastId = oblastId;
+        OblastId = oblastId;
 
         _token = TrimCharToken(token);
     }
@@ -36,18 +36,18 @@ public partial class AlertsControl : UserControl
     {
         IsActiveAlertLabel.Content = null;
 
-        if (!AlertsHelper.IsValidOblastId(_oblastId))
+        if (!AlertsHelper.IsValidOblastId(OblastId))
         {
             MessageBox.Show("Invalid oblast");
 
             return;
         }
 
-        var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
+        //var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
+
+        var content = (await _httpClient.GetWithTokenAsync<string>(ApiUrls.GetActiveAlertsByOblast(OblastId), _token)).Trim('"');
         
-        var content = await _httpClient.GetWithTokenAsync<string>(url, _token);
-        
-        content = content.Trim('"');
+        //content = content.Trim('"');
 
         switch (content)
         {

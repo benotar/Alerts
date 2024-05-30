@@ -9,7 +9,7 @@ namespace Alerts.WPF.Windows;
 
 public partial class RegisterWindow : Window
 {
-    private MyHttpClient _httpClient;
+    private readonly MyHttpClient _httpClient;
     
     public RegisterWindow()
     {
@@ -39,9 +39,9 @@ public partial class RegisterWindow : Window
             ConfirmPassword = ConfirmUserPasswordBox.Password
         };
 
-        const string apiUrl = "https://localhost:44305/auth/Register";
+        //const string apiUrl = "https://localhost:44305/auth/Register";
 
-        var newUser = await _httpClient.PostAsync<User>(apiUrl, userModel);
+        var newUser = await _httpClient.PostAsync<User>(ApiUrls.GetRegisterUrl(), userModel);
 
         if (newUser is null)
         {
