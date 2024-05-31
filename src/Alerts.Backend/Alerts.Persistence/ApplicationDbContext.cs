@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alerts.Persistence;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
-    : DbContext(options) ,IApplicationDbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : DbContext(options), IApplicationDbContext
 {
     public DbSet<User> Users { get; set; }
 
