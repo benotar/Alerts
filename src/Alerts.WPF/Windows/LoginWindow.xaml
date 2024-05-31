@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         xmlns:models="clr-namespace:Alerts.WPF.Data.Models"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="820" Width="450"
+        Title="LoginWindow" Height="820" Width="465"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"

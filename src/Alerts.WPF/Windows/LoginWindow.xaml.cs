@@ -31,6 +31,8 @@ public partial class LoginWindow : Window
         SetDarkTheme();
 
         _httpClient = new MyHttpClient();
+
+        DelayGuestModeBtnAsync();
     }
 
     private void SetDarkTheme()
@@ -112,5 +114,14 @@ public partial class LoginWindow : Window
         this.Close();
 
         fullAlertWindow.Show();
+    }
+
+    private async void DelayGuestModeBtnAsync()
+    {
+        GuestModeBtn.IsEnabled = false;
+        
+        await Task.Delay(5000);
+        
+        GuestModeBtn.IsEnabled = true;
     }
 }

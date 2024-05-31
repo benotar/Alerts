@@ -1,6 +1,6 @@
 ﻿using Alerts.Application.Interfaces.Services;
 
-namespace Alerts.WebApp.Servives.AlertsService;
+namespace Alerts.WebApp.Services.AlertsService;
 
 public class AlertService : IAlertsService
 {

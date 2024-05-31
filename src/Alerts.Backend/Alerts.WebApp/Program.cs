@@ -3,7 +3,7 @@ using Alerts.Application.Configurations;
 using Alerts.Application.Interfaces.Services;
 using Alerts.Persistence;
 using Alerts.WebApp;
-using Alerts.WebApp.Servives.AlertsService;
+using Alerts.WebApp.Services.AlertsService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -38,8 +38,6 @@ DatabaseInitializer.Initialize(applicationDbContext);
 
 var jwtConfiguration = scope.ServiceProvider.GetService<JwtConfiguration>();
 
-builder.Services.AddAuthorization();
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,6 +55,11 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.SecretKey)),
         ValidateIssuerSigningKey = true
     };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
 });
 
 var app = builder.Build();
