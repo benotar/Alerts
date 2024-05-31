@@ -11,8 +11,8 @@ public class GetAlertByOblastId
 
     private readonly string _token;
 
-    private readonly string _temp = ".json?token=";
-    
+    private const string Temp = ".json?token=";
+
     public GetAlertByOblastId(string url, int locationId, string token)
     {
         _url = url;
@@ -34,7 +34,7 @@ public class GetAlertByOblastId
 
             fullUrlBuilder.Append(_locationId);
 
-            fullUrlBuilder.Append(_temp);
+            fullUrlBuilder.Append(Temp);
 
             fullUrlBuilder.Append(_token);
 

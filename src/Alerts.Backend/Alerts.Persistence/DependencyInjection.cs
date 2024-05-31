@@ -1,5 +1,4 @@
-﻿using Alerts.Application.Configurations;
-using Alerts.Application.Interfaces;
+﻿using Alerts.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
