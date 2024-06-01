@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
         Title="FullAlertSecondWindow" Height="500" Width="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/favicon.ico">
     
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">

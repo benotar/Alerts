@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d" Width="510" Height="260"
         Title="AddRegionWindow"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/favicon.ico">
     
     <Grid x:Name="AddRegionWindowGrid">
         

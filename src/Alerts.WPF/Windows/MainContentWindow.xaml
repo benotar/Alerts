@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="MainContentWindow" Height="290" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignPaper}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/favicon.ico">
 
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">

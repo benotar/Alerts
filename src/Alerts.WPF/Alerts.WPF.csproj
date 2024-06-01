@@ -29,4 +29,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\favicon.ico" />
+      <Resource Include="Resources\favicon.ico" />
+    </ItemGroup>
+
 </Project>
