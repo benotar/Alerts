@@ -56,8 +56,6 @@ public partial class LoginWindow : Window
 
             return;
         }
-
-        //const string apiUrl = "https://localhost:44305/auth/Login";
         
         var token = await _httpClient.PostAsync<string>(ApiUrls.GetLoginUrl(), new { UserName = userName, Password = userPassword });
 
@@ -70,7 +68,7 @@ public partial class LoginWindow : Window
 
         MainContentWindow mainContentWindow = new(user!, token);
 
-        this.Close();
+        Close();
         
         mainContentWindow.Show();
     }
@@ -79,7 +77,7 @@ public partial class LoginWindow : Window
     {
         var registerWindow = new RegisterWindow();
 
-        this.Close();
+        Close();
         
         registerWindow.Show();
     }
@@ -111,7 +109,7 @@ public partial class LoginWindow : Window
     {
         var fullAlertWindow = new FullAlertWindow(null, null, this);
         
-        this.Close();
+        Close();
 
         fullAlertWindow.Show();
     }

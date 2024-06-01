@@ -1,9 +1,11 @@
-﻿using Alerts.WPF.Controls;
+﻿using System.Windows;
+using System.Windows.Input;
+using Alerts.WPF.Controls;
 using Alerts.WPF.Data.Models;
 
 namespace Alerts.WPF.Windows;
 
-public partial class AddRegionWindow : System.Windows.Window
+public partial class AddRegionWindow : Window
 {
     private readonly MyUserControl _userControl;
     
@@ -22,6 +24,13 @@ public partial class AddRegionWindow : System.Windows.Window
         _user = user;
         
         LoadAddRegionControl();
+    }
+    
+    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+
+        DragMove();
     }
     
     private void LoadAddRegionControl()

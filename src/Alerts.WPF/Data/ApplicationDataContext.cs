@@ -1,4 +1,6 @@
-﻿using Alerts.WPF.Data.Models;
+﻿using System.IO;
+using Alerts.WPF.Data.Models;
+using Alerts.WPF.Hepler;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alerts.WPF.Data;
@@ -9,10 +11,12 @@ public class ApplicationDataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        const string dbPath = @"M:\IT Step and Programming\Coursework\Alerts\src\Alerts.Backend\Alerts.WebApp\alerts.db";
-        //const string dbPath = @"..\..\..\src\Alerts.Backend\Alerts.WebApp\alerts.db";
+        var executionDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-
+        var projectRoot = Path.GetFullPath(Path.Combine(executionDirectory, @"..\..\..\..\.."));
+        
+        var dbPath = Path.Combine(projectRoot, DatabaseHelper.GetRelativeDbPath());
+        
         optionsBuilder.UseSqlite(
             $"Data Source={dbPath}");
     }

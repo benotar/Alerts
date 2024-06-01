@@ -38,8 +38,6 @@ public partial class DeleteRegionControl : UserControl
     {
         var region = RegionTextBox.Text;
 
-        //var apiUrl = $"https://localhost:44305/userApi/DeleteRegion/{_user.Id}/{region}";
-
         var result = await _httpClient.DeleteWithTokenAsync(ApiUrls.GetDeleteRegionUrl(_user.Id, region), _token);
 
         if (!result)

@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="MainContentWindow" Height="290" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignPaper}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Icon="../Resources/favicon.ico">
 
@@ -23,8 +26,8 @@
     </Window.Resources>
 
     <StackPanel Loaded="Load"
-                x:Name="MainPanel"
-                Background="#2F2F2F">
+                    x:Name="MainPanel"
+                    Background="#2F2F2F">
         
         <materialDesign:ColorZone Padding="16"
                                   Mode="PrimaryMid"
@@ -69,5 +72,7 @@
         </materialDesign:ColorZone>
 
     </StackPanel>
+    
+    
     
 </Window>

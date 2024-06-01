@@ -1,7 +1,7 @@
 ﻿using Alerts.WPF.AlertsModels.Enums;
+using Newtonsoft.Json;
 
 namespace Alerts.WPF.AlertsModels;
-using Newtonsoft.Json;
 
 public class Alerts
 {

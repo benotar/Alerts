@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using Alerts.WPF.Controls;
 using Alerts.WPF.Data.Models;
 
@@ -25,6 +26,13 @@ public partial class DeleteRegionWindow : Window
         LoadDeleteRegionControl();
     }
 
+    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+
+        DragMove();
+    }
+    
     private void LoadDeleteRegionControl()
     {
         var deleteRegionControl = new DeleteRegionControl(this, _userControl, _token, _user);

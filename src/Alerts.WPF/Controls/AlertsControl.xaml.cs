@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -43,11 +40,7 @@ public partial class AlertsControl : UserControl
             return;
         }
 
-        //var url = $"https://localhost:44305/alertsApi/GetAlertByOblast?locationId={_oblastId}";
-
         var content = (await _httpClient.GetWithTokenAsync<string>(ApiUrls.GetActiveAlertsByOblast(OblastId), _token)).Trim('"');
-        
-        //content = content.Trim('"');
 
         switch (content)
         {

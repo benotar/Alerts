@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d" Width="510" Height="260"
         Title="AddRegionWindow"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Icon="../Resources/favicon.ico">
     

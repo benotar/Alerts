@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using Alerts.WPF.AlertsModels;
 using Alerts.WPF.Hepler;
 
@@ -29,6 +30,13 @@ public partial class FullAlertSecondWindow : Window
         
         FullInfoBackBtn.IsEnabled = true;
 
+    }
+    
+    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+
+        DragMove();
     }
     
     private void FullInfoBackBtnOnClick(object sender, RoutedEventArgs e)

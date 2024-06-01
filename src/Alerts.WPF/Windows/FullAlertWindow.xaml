@@ -7,6 +7,9 @@
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
         Title="FullAlertWindow" Height="580" Width="700"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Icon="../Resources/favicon.ico">
     

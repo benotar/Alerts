@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Input;
 using Alerts.WPF.Controls;
-using Alerts.WPF.Data;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
 
@@ -103,6 +102,13 @@ public partial class MainContentWindow : Window
         OpenDeleteRegionWindow();
     }
 
+    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+
+        DragMove();
+    }
+    
     private void OpenFullAlertWindow()
     {
         var fullAlertWindow = new FullAlertWindow(_token, _user, this);

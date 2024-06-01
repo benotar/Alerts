@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using Alerts.WPF.AlertsModels;
 using Alerts.WPF.Data.Models;
 using Alerts.WPF.Hepler;
@@ -75,8 +76,6 @@ public partial class FullAlertWindow : Window
     
     private async Task SetAlertsAsync()
     {
-        //const string apiUrl = "https://localhost:44305/alertsApi/GetActiveAlerts";
-
         var rootAlerts = await _httpClient.GetAsync<RootObject>(ApiUrls.GetActiveAlertsUrl());
 
         _alerts = rootAlerts.Alerts;
@@ -94,6 +93,13 @@ public partial class FullAlertWindow : Window
         {
             DataContext = this;
         }
+    }
+    
+    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+
+        DragMove();
     }
     
     private void ReOpenMainWindow()
