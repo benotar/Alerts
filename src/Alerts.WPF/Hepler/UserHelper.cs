@@ -6,7 +6,7 @@ namespace Alerts.WPF.Hepler;
 
 public static class UserHelper
 {
-    public static async Task<User?> GetActualUserData(string userName)
+    public static async Task<User?> GetActualUserDataAsync(string userName)
     {
         await using var db = new ApplicationDataContext();
         

@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Alerts.WPF.Windows"
         mc:Ignorable="d"
-        Title="FullAlertSecondWindow" Height="500" Width="600"
+        Title="FullAlertSecondWindow" Height="540" Width="600"
         Background="{x:Null}"
         AllowsTransparency="True"
         WindowStyle="None"
@@ -26,7 +26,7 @@
     
     <StackPanel Background="{DynamicResource MaterialDesignPaper}"
                 Orientation="Vertical"
-                Loaded="FullAlertSecondWindowLoad">
+                Loaded="FullAlertSecondWindowLoadAsync">
         
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Left"
@@ -86,6 +86,16 @@
                          Style="{StaticResource LabelStyle}"/>
             
                   <Label Content="{Binding StartedAt}"
+                         Style="{StaticResource LabelStyle}"/>
+           </StackPanel>
+           
+           <StackPanel Orientation="Horizontal"
+                       HorizontalAlignment="Left"
+                       Margin="15 0 0 5">
+                  <Label Content="Тривалість тривоги - "
+                         Style="{StaticResource LabelStyle}"/>
+            
+                  <Label Content="{Binding Duration}"
                          Style="{StaticResource LabelStyle}"/>
            </StackPanel>
            

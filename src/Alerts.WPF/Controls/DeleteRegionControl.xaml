@@ -36,7 +36,7 @@
                       Foreground="White"
                       FontSize="18"
                       FontFamily="Consolas"
-                      Loaded="DeleteRegionsControlLoad"
+                      Loaded="DeleteRegionsControlLoadAsync"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}" />
         </StackPanel>
 
@@ -49,7 +49,7 @@
                     Content="Видалити"
                     FontSize="16"
                     x:Name="DeleteRegionBtn"
-                    Click="DeleteRegionBtnOnClick" />
+                    Click="DeleteRegionBtnOnClickASync" />
             
             <Button Width="200"
                     Height="35"

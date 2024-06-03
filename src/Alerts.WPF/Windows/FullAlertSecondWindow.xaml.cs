@@ -22,7 +22,7 @@ public partial class FullAlertSecondWindow : Window
         DataContext = _selectedLocation;
     }
 
-    private async void FullAlertSecondWindowLoad(object sender, RoutedEventArgs e)
+    private async void FullAlertSecondWindowLoadAsync(object sender, RoutedEventArgs e)
     {
         FullInfoBackBtn.IsEnabled = false;
 

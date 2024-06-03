@@ -9,6 +9,8 @@ public class BindingAlerts
     
     public DateTime StartedAt { get; set; }
     
+    public string Duration { get; set; }
+    
     public DateTime UpdatedAt { get; set; }
     
     public string AlertType { get; set; }

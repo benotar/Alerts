@@ -26,10 +26,10 @@ public partial class AlertsControl : UserControl
 
     private void Load(object sender, RoutedEventArgs e)
     {
-        GetActualData();
+        GetActualDataAsync();
     }
 
-    public async void GetActualData()
+    public async void GetActualDataAsync()
     {
         IsActiveAlertLabel.Content = null;
 

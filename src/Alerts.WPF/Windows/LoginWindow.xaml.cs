@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Alerts.WPF.Data;
 using Alerts.WPF.Hepler;
 using Alerts.WPF.HttpQueries;
@@ -44,7 +45,7 @@ public partial class LoginWindow : Window
         _paletteHelper.SetTheme(theme);
     }
 
-    private async void LoginBtnOnClick(object sender, RoutedEventArgs e)
+    private async void LoginBtnOnClickAsync(object sender, RoutedEventArgs e)
     {
         var userName = UserNameTxtBox.Text;
 
@@ -53,7 +54,7 @@ public partial class LoginWindow : Window
         if (IsNullOrEmpty(userName) || IsNullOrEmpty(userPassword))
         {
             MessageBox.Show("Відсутні дані про користувача!");
-
+            
             return;
         }
         
@@ -63,7 +64,7 @@ public partial class LoginWindow : Window
         {
             return;
         }
-
+        
         var user = await _db.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
 
         MainContentWindow mainContentWindow = new(user!, token);

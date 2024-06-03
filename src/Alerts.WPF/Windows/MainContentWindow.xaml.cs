@@ -46,7 +46,7 @@ public partial class MainContentWindow : Window
         
     }
 
-    private async void Load(object sender, RoutedEventArgs e)
+    private async void LoadAsync(object sender, RoutedEventArgs e)
     {
         HelloUserLabel.Content += _user.UserName;
         
@@ -67,7 +67,7 @@ public partial class MainContentWindow : Window
         Application.Current.Shutdown();
     }
     
-    private async void GetAlertForRegionButtonOnClick(object sender, RoutedEventArgs e)
+    private async void GetAlertForRegionButtonOnClickAsync(object sender, RoutedEventArgs e)
     {
         var location = SelectedRegionLabel.Content.ToString();
 
@@ -157,7 +157,7 @@ public partial class MainContentWindow : Window
 
         existingControl.OblastId = oblastId;
         
-        existingControl.GetActualData();
+        existingControl.GetActualDataAsync();
     }
     
     private void AddUserControl()
@@ -212,7 +212,7 @@ public partial class MainContentWindow : Window
 
         _getAlertForRegionButton.Margin = new Thickness(0, -33, 12, 0);
 
-        _getAlertForRegionButton.Click += GetAlertForRegionButtonOnClick;
+        _getAlertForRegionButton.Click += GetAlertForRegionButtonOnClickAsync;
 
         MainPanel.Children.Add(_getAlertForRegionButton);
     }

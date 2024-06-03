@@ -6,13 +6,13 @@ using Alerts.WPF.Windows;
 
 namespace Alerts.WPF.Controls;
 
-public partial class MyUserControl : System.Windows.Controls.UserControl
+public partial class MyUserControl : UserControl
 {
     private MainContentWindow _mainContentWindow;
 
     private User _user;
     
-    public MyUserControl(MainContentWindow mainContentWindow, User user /*, ApplicationDataContext db*/)
+    public MyUserControl(MainContentWindow mainContentWindow, User user)
     {
         InitializeComponent();
 
@@ -25,7 +25,7 @@ public partial class MyUserControl : System.Windows.Controls.UserControl
 
     private void RegionsComboBoxLoadFill(object sender, RoutedEventArgs e)
     {
-        FillRegionsComboBox();
+        FillRegionsComboBoxAsync();
     }
     
     private void RegionsComboBoxItemSelected(object sender, SelectionChangedEventArgs e)
@@ -47,9 +47,9 @@ public partial class MyUserControl : System.Windows.Controls.UserControl
         _mainContentWindow.SelectedRegionLabel.Content = RegionsComboBox.SelectedItem;
     }
 
-    public async void FillRegionsComboBox()
+    public async void FillRegionsComboBoxAsync()
     {
-        var actualUser = await UserHelper.GetActualUserData(_user.UserName);
+        var actualUser = await UserHelper.GetActualUserDataAsync(_user.UserName);
 
         if (actualUser is null)
         {

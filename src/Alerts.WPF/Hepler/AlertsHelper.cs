@@ -75,6 +75,7 @@ public static class AlertsHelper
                 LocationTitle = alert.LocationTitle,
                 LocationType = GetLocationTypeString(alert.LocationType),
                 StartedAt = alert.StartedAt,
+                Duration = (DateTime.Now - alert.StartedAt).TimeSpanConvertString(),
                 UpdatedAt = alert.UpdatedAt,
                 AlertType = GetAlertTypeString(alert.AlertType),
                 LocationOblast = alert.LocationOblast,

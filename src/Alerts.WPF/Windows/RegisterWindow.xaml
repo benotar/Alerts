@@ -82,7 +82,7 @@
                         Height="53"
                         Width="300"
                         materialDesign:ButtonAssist.CornerRadius="10"
-                        Click="CreateAccountBtnOnClick" />
+                        Click="CreateAccountBtnOnClickAsync" />
                 
                 <Button Margin="0 0 0 0"
                         Content="Відміна"

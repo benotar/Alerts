@@ -34,7 +34,7 @@ public partial class DeleteRegionControl : UserControl
         _user = user;
     }
     
-    private async void DeleteRegionBtnOnClick(object sender, RoutedEventArgs e)
+    private async void DeleteRegionBtnOnClickASync(object sender, RoutedEventArgs e)
     {
         var region = RegionTextBox.Text;
 
@@ -47,12 +47,12 @@ public partial class DeleteRegionControl : UserControl
         
         MessageBox.Show($"Регіон \'{region}\' успішно видалено!");
 
-        _userControl.FillRegionsComboBox();
+        _userControl.FillRegionsComboBoxAsync();
         
         ReOpenMainWindow();
     }
     
-    private async void DeleteRegionsControlLoad(object sender, RoutedEventArgs e)
+    private async void DeleteRegionsControlLoadAsync(object sender, RoutedEventArgs e)
     {
         if (sender is not ComboBox comboBox)
         {
@@ -61,7 +61,7 @@ public partial class DeleteRegionControl : UserControl
             return;
         }
         
-        var actualUser = await UserHelper.GetActualUserData(_user.UserName);
+        var actualUser = await UserHelper.GetActualUserDataAsync(_user.UserName);
 
         if (actualUser is null)
         {

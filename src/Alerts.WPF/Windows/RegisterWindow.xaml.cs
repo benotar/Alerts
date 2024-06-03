@@ -18,7 +18,7 @@ public partial class RegisterWindow : Window
         _httpClient = new MyHttpClient();
     }
 
-    private async void CreateAccountBtnOnClick(object sender, RoutedEventArgs e)
+    private async void CreateAccountBtnOnClickAsync(object sender, RoutedEventArgs e)
     {
 
         if (IsNullOrEmpty(CreateLoginTextBlock.Text)

@@ -36,7 +36,7 @@
                       Foreground="White"
                       FontSize="18"
                       FontFamily="Consolas"
-                      Loaded="AddRegionsControlLoad"
+                      Loaded="AddRegionsControlLoadAsync"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}" />
         </StackPanel>
 
@@ -49,7 +49,7 @@
                     Content="Додати"
                     FontSize="16"
                     x:Name="AddRegionBtn"
-                    Click="AddRegionBtnOnClick" />
+                    Click="AddRegionBtnOnClickAsync" />
 
             <Button Width="200"
                     Height="35"
